@@ -1824,29 +1824,34 @@ h1, h2, h3, h4 {
 /* --------------------------------------------------------------------------
    Professional Section Load Animations
    -------------------------------------------------------------------------- */
-.reveal-on-scroll {
+.js-anim .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(36px);
-  filter: blur(6px);
+  transform: translateY(56px);
+  filter: blur(4px);
   transition:
-    opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
-    transform 0.95s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
-    filter 0.95s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+    filter 1s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
   will-change: opacity, transform, filter;
 }
 
+.reveal-on-scroll {
+  /* visible by default until JS enables animations */
+}
+
+.js-anim .reveal-on-scroll.is-visible,
 .reveal-on-scroll.is-visible {
   opacity: 1;
   transform: translateY(0);
   filter: blur(0);
 }
 
-.reveal-on-scroll.reveal-from-left {
-  transform: translateX(-42px);
+.js-anim .reveal-on-scroll.reveal-from-left:not(.is-visible) {
+  transform: translateX(-56px);
 }
 
-.reveal-on-scroll.reveal-from-right {
-  transform: translateX(42px);
+.js-anim .reveal-on-scroll.reveal-from-right:not(.is-visible) {
+  transform: translateX(56px);
 }
 
 .reveal-on-scroll.reveal-from-left.is-visible,
@@ -1854,8 +1859,8 @@ h1, h2, h3, h4 {
   transform: translateX(0);
 }
 
-.reveal-on-scroll.reveal-scale {
-  transform: translateY(24px) scale(0.94);
+.js-anim .reveal-on-scroll.reveal-scale:not(.is-visible) {
+  transform: translateY(40px) scale(0.92);
 }
 
 .reveal-on-scroll.reveal-scale.is-visible {
@@ -1909,9 +1914,9 @@ html[dir="rtl"] .insta-content .sub-heading::after {
     transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
 }
 
-.animate-section:not(.is-inview) .section-title {
+.js-anim .animate-section:not(.is-inview) .section-title {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(28px);
 }
 
 .animate-section.is-inview .section-title {
@@ -1925,9 +1930,9 @@ html[dir="rtl"] .insta-content .sub-heading::after {
     transform 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
 }
 
-.animate-section:not(.is-inview) .section-intro {
+.js-anim .animate-section:not(.is-inview) .section-intro {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(22px);
 }
 
 .animate-section.is-inview .section-intro {
@@ -1973,7 +1978,7 @@ html[dir="rtl"] .insta-content .sub-heading::after {
   transform: translateY(0) scale(1);
 }
 
-.site-footer.animate-section:not(.is-inview) .footer-content > * {
+.js-anim .site-footer.animate-section:not(.is-inview) .footer-content > * {
   opacity: 0;
   transform: translateY(24px);
 }
@@ -2116,7 +2121,7 @@ html[dir="rtl"] .insta-content .sub-heading::after {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.video-section:not(.is-inview) .video-stat-item {
+.js-anim .video-section:not(.is-inview) .video-stat-item {
   opacity: 0;
   transform: translateY(18px);
 }
@@ -2134,7 +2139,7 @@ html[dir="rtl"] .insta-content .sub-heading::after {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.insta-grid a {
+.js-anim .insta-grid a {
   opacity: 0;
   transform: translateY(16px) scale(0.96);
 }

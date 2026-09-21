@@ -6,6 +6,10 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Enable animation styles only after JS is ready (prevents blank content if CSS caches early)
+  document.documentElement.classList.add('js-anim');
+  document.body.classList.remove('js-pending');
+
   // SVG Icon Templates for Dynamic Controls
   const ICONS = {
     play: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>',
@@ -89,22 +93,34 @@ document.addEventListener('DOMContentLoaded', () => {
       entry.target.classList.add('is-inview');
       // Cascade nested reveals slightly after section enters
       entry.target.querySelectorAll('.reveal-on-scroll:not(.is-visible)').forEach((child, i) => {
-        window.setTimeout(() => child.classList.add('is-visible'), prefersReducedMotion ? 0 : 80 + i * 70);
+        window.setTimeout(() => child.classList.add('is-visible'), prefersReducedMotion ? 0 : 60 + i * 80);
       });
       observer.unobserve(entry.target);
     });
   }, {
     root: null,
-    threshold: 0.18,
-    rootMargin: '0px 0px -10% 0px'
+    threshold: 0.08,
+    rootMargin: '0px 0px -5% 0px'
   });
 
   animateSections.forEach((section) => {
     if (section.id === 'hero') {
       section.classList.add('is-inview');
+      section.querySelectorAll('.reveal-on-scroll').forEach((el) => el.classList.add('is-visible'));
       return;
     }
     sectionObserver.observe(section);
+  });
+
+  // Failsafe: if a section is already on screen, reveal immediately
+  window.requestAnimationFrame(() => {
+    animateSections.forEach((section) => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.85 && rect.bottom > 80) {
+        section.classList.add('is-inview');
+        section.querySelectorAll('.reveal-on-scroll').forEach((el) => el.classList.add('is-visible'));
+      }
+    });
   });
 
   if (prefersReducedMotion) {
