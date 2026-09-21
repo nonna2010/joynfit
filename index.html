@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JoynFit — Healthy Desserts Crafted for Pure Joy</title>
+    <meta name="description"
+        content="Discover JoynFit: artisan healthy desserts made with wholesome ingredients, zero refined sugars, and exquisite taste. Fresh, clean, and guilt-free indulgence.">
+
+    <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="landingPage.css">
+</head>
+
+<body>
+
+    <!-- Ambient Organic Background Blobs -->
+    <div class="ambient-glow glow-1" aria-hidden="true"></div>
+    <div class="ambient-glow glow-2" aria-hidden="true"></div>
+    <div class="ambient-glow glow-3" aria-hidden="true"></div>
+
+    <!-- Navigation Bar -->
+    <header class="site-header" id="header">
+        <div class="nav-container">
+            <a href="#hero" class="brand-logo" aria-label="JoynFit Home">
+                <img src="assets/images/brand/joynfit_logo.png" alt="JoynFit" class="navbar-logo-img">
+            </a>
+
+            <nav class="desktop-nav" aria-label="Main Navigation">
+                <ul class="nav-links">
+                    <li><a href="#about">Our Story</a></li>
+                    <li><a href="#products">Creations</a></li>
+                    <li><a href="#reviews">Customer Love</a></li>
+                    <li><a href="#video-review">Watch Reviews</a></li>
+                    <li><a href="#instagram">Community</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="https://www.instagram.com/joynfit.eg?stkn=MWc2dnRtcTJsa2xocQ=="
+                    class="btn btn-secondary nav-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                    <span>Instagram</span>
+                </a>
+                <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle Navigation Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <ul class="mobile-links">
+                <li><a href="#about" class="mobile-nav-link">Our Story</a></li>
+                <li><a href="#products" class="mobile-nav-link">Creations</a></li>
+                <li><a href="#reviews" class="mobile-nav-link">Customer Love</a></li>
+                <li><a href="#video-review" class="mobile-nav-link">Watch Reviews</a></li>
+                <li><a href="#instagram" class="mobile-nav-link">Community</a></li>
+            </ul>
+            <div class="mobile-action-wrapper">
+                <a href="#instagram" class="btn btn-primary mobile-cta">Explore on Instagram</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero-section" id="hero">
+            <div class="container hero-grid">
+                <!-- Hero Content Column -->
+                <div class="hero-content reveal-on-scroll">
+                    <div class="hero-tag">
+                        <span class="tag-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z" />
+                            </svg>
+                        </span>
+                        <span>Artisan Healthy Sweets & Desserts</span>
+                    </div>
+
+                    <h1 class="hero-title">
+                        Wholesome sweetness, <br>
+                        <em>pure delight</em> in every bite.
+                    </h1>
+
+                    <p class="hero-description">
+                        JoynFit crafts nutrient-dense, naturally sweetened desserts designed for real enjoyment.
+                        Experience the silky balance of pure flavors made with wholesome, uncompromised ingredients.
+                    </p>
+
+                    <div class="hero-cta-group">
+                        <a href="#products" class="btn btn-primary">
+                            <span>Explore Creations</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                        <a href="#reviews" class="btn btn-outline">
+                            <span>Customer Love</span>
+                            <span class="badge-count">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                    <polygon
+                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                </svg>
+                                4.9
+                            </span>
+                        </a>
+                    </div>
+
+                    <!-- Trust Badges -->
+                    <div class="hero-pill-badges">
+                        <div class="pill-badge">
+                            <span class="pill-dot"></span>
+                            <span>100% Wholesome</span>
+                        </div>
+                        <div class="pill-badge">
+                            <span class="pill-dot"></span>
+                            <span>No Refined Sugar</span>
+                        </div>
+                        <div class="pill-badge">
+                            <span class="pill-dot"></span>
+                            <span>Handcrafted Daily</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Visual Showcase Column -->
+                <div class="hero-visual reveal-on-scroll">
+                    <div class="hero-showcase-wrapper">
+                        <!-- Organic soft backdrop rings -->
+                        <div class="halo-circle halo-outer"></div>
+                        <div class="halo-circle halo-inner"></div>
+
+                        <!-- Floating Hero Image -->
+                        <div class="floating-hero-image-card">
+                            <img src="assets/images/products/dessert1.jpeg" alt="JoynFit Layered Chia & Berry Parfait"
+                                class="hero-main-img" id="heroMainImage">
+
+                            <!-- Floating Micro Glass Badges -->
+                            <div class="floating-badge badge-top-right">
+                                <span class="badge-icon-svg">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 2L9.5 9.5 2 12l7.5 2.5L12 22l2.5-7.5L22 12l-7.5-2.5z" />
+                                    </svg>
+                                </span>
+                                <div class="badge-text-group">
+                                    <strong>Clean Sweetness</strong>
+                                    <small>Zero Artificial Additives</small>
+                                </div>
+                            </div>
+
+                            <div class="floating-badge badge-bottom-left">
+                                <span class="badge-icon-svg">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M17 8h1a4 4 0 1 1 0 8h-1" />
+                                        <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" />
+                                        <line x1="6" y1="2" x2="6" y2="4" />
+                                        <line x1="10" y1="2" x2="10" y2="4" />
+                                    </svg>
+                                </span>
+                                <div class="badge-text-group">
+                                    <strong>Berry Chia Parfait</strong>
+                                    <small>Fresh Organic Berries</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Decorative Floating Organic SVGs -->
+                        <div class="deco-leaf leaf-1" aria-hidden="true">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-matcha)"
+                                stroke-width="1.8">
+                                <path
+                                    d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                            </svg>
+                        </div>
+                        <div class="deco-leaf leaf-2" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-rose)"
+                                stroke-width="1.8">
+                                <path
+                                    d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z" />
+                            </svg>
+                        </div>
+                        <div class="deco-leaf leaf-3" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent-honey)"
+                                stroke-width="1.8">
+                                <circle cx="12" cy="12" r="8" />
+                                <path d="m12 8 2 4 4 2-4 2-2 4-2-4-4-2 4-2Z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <a href="#about" class="scroll-indicator" aria-label="Scroll down">
+                <span class="mouse-icon">
+                    <span class="mouse-wheel"></span>
+                </span>
+                <span class="scroll-text">Scroll to discover</span>
+            </a>
+        </section>
+
+        <!-- BRAND STORY & PILLARS SECTION -->
+        <section class="about-section" id="about">
+            <div class="container">
+                <div class="section-header text-center reveal-on-scroll">
+                    <span class="sub-heading">The JoynFit Philosophy</span>
+                    <h2 class="section-title">Dessert without compromise.</h2>
+                    <p class="section-intro">
+                        We believe you should never have to choose between taking care of your body and savoring
+                        something extraordinary. Every JoynFit creation is crafted with intention, calmness, and
+                        wholesome ingredients.
+                    </p>
+                </div>
+
+                <div class="pillars-grid">
+                    <div class="pillar-card reveal-on-scroll">
+                        <div class="pillar-icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z" />
+                                <path d="M10 2c1 .5 2 2 2 5" />
+                            </svg>
+                        </div>
+                        <h3>Natural Whole Foods</h3>
+                        <p>From organic berries and cold-pressed coconut milk to raw nuts and chia seeds — only honest,
+                            unrefined pantry essentials.</p>
+                    </div>
+
+                    <div class="pillar-card reveal-on-scroll">
+                        <div class="pillar-icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+                            </svg>
+                        </div>
+                        <h3>Mindful Sweetness</h3>
+                        <p>Sweetened delicately using natural fruit reductions, pure maple, and monk fruit for a
+                            balanced, gentle sweetness that honors your body.</p>
+                    </div>
+
+                    <div class="pillar-card reveal-on-scroll">
+                        <div class="pillar-icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                <path d="m9 12 2 2 4-4" />
+                            </svg>
+                        </div>
+                        <h3>Nutrient Balanced</h3>
+                        <p>Packed with natural dietary fiber, healthy fats, and plant protein to keep energy steady
+                            without sugar crashes.</p>
+                    </div>
+
+                    <div class="pillar-card reveal-on-scroll">
+                        <div class="pillar-icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="8" r="6" />
+                                <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
+                            </svg>
+                        </div>
+                        <h3>Artisan Small Batches</h3>
+                        <p>Each jar and bite is carefully prepared by hand in small artisan batches to preserve
+                            freshness and unmatched texture.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRODUCTS SHOWCASE SECTION -->
+        <section class="products-section" id="products">
+            <div class="container">
+                <div class="products-header reveal-on-scroll">
+                    <div>
+                        <span class="sub-heading">Our Handcrafted Creations</span>
+                        <h2 class="section-title">Wholesome treats, crafted for you.</h2>
+                        <p class="section-intro">Explore our signature healthy desserts. Click any creation for tasting
+                            notes and wholesome details.</p>
+                    </div>
+
+
+                </div>
+
+                <!-- Product Cards Grid -->
+                <div class="products-grid">
+
+                    <!-- Product Card 1 -->
+                    <div class="product-card reveal-on-scroll">
+                        <div class="product-img-wrapper">
+                            <span class="product-tag">Bestseller</span>
+                            <img src="assets/images/products/dessert1.jpeg" alt="Peanut Chocolate Protein Bar"
+                                class="product-img">
+                            <button class="quick-view-btn">Quick View</button>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-meta">
+                                <span class="product-category">Protein Bar</span>
+                                <span class="calorie-badge">100% Wholesome</span>
+                            </div>
+                            <h3 class="product-name">Peanut Chocolate Protein Bar</h3>
+                            <p class="product-desc">Rich roasted peanut butter blended with raw cacao and natural sweeteners, wrapped in a crunchy chocolate coating. Clean fuel for your day.</p>
+
+                            <div class="product-highlights">
+                                <span class="highlight-chip">High Protein</span>
+                                <span class="highlight-chip">No Refined Sugar</span>
+                                <span class="highlight-chip">Natural Energy</span>
+                            </div>
+
+                            <!-- Product Details for Modal (Stored cleanly in HTML) -->
+                            <div class="product-extra-data" hidden>
+                                <span class="extra-calories">220 kcal</span>
+                                <span class="extra-protein">12g</span>
+                                <span class="extra-fiber">4g</span>
+                                <span class="extra-ingredients">Roasted peanut butter, organic raw cacao, Medjool dates, oats, natural chocolate coating, pink Himalayan salt.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 2 -->
+                    <div class="product-card reveal-on-scroll">
+                        <div class="product-img-wrapper">
+                            <span class="product-tag">Seasonal</span>
+                            <img src="assets/images/products/dessert2.jpeg" alt="Pumpkin Seeds Protein Bar"
+                                class="product-img">
+                            <button class="quick-view-btn">Quick View</button>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-meta">
+                                <span class="product-category">Protein Bar</span>
+                                <span class="calorie-badge">Antioxidant Boost</span>
+                            </div>
+                            <h3 class="product-name">Pumpkin Seeds Protein Bar</h3>
+                            <p class="product-desc">Crunchy pumpkin seeds and sunflower seeds bound with raw honey and a hint of vanilla. Packed with minerals and healthy fats.</p>
+
+                            <div class="product-highlights">
+                                <span class="highlight-chip">Seed-Packed</span>
+                                <span class="highlight-chip">Mineral Rich</span>
+                                <span class="highlight-chip">Healthy Fats</span>
+                            </div>
+
+                            <!-- Product Details for Modal (Stored cleanly in HTML) -->
+                            <div class="product-extra-data" hidden>
+                                <span class="extra-calories">200 kcal</span>
+                                <span class="extra-protein">10g</span>
+                                <span class="extra-fiber">5g</span>
+                                <span class="extra-ingredients">Pumpkin seeds, sunflower seeds, raw honey, oats, vanilla extract, cold-pressed coconut oil.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 3 -->
+                    <div class="product-card reveal-on-scroll">
+                        <div class="product-img-wrapper">
+                            <span class="product-tag">Protein Favorite</span>
+                            <img src="assets/images/products/dessert3.jpeg" alt="Peanut Classic Protein Bar"
+                                class="product-img">
+                            <button class="quick-view-btn">Quick View</button>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-meta">
+                                <span class="product-category">Protein Bar</span>
+                                <span class="calorie-badge">Energy Boost</span>
+                            </div>
+                            <h3 class="product-name">Peanut Classic Protein Bar</h3>
+                            <p class="product-desc">A simple, powerful bar loaded with roasted peanuts and natural oats. Clean ingredients, bold peanut flavor, and sustained energy.</p>
+
+                            <div class="product-highlights">
+                                <span class="highlight-chip">Plant Protein</span>
+                                <span class="highlight-chip">Peanut Loaded</span>
+                                <span class="highlight-chip">Clean Energy</span>
+                            </div>
+
+                            <!-- Product Details for Modal (Stored cleanly in HTML) -->
+                            <div class="product-extra-data" hidden>
+                                <span class="extra-calories">210 kcal</span>
+                                <span class="extra-protein">11g</span>
+                                <span class="extra-fiber">3g</span>
+                                <span class="extra-ingredients">Roasted peanuts, organic oats, Medjool dates, natural peanut butter, a touch of sea salt.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 4 -->
+                    <div class="product-card reveal-on-scroll">
+                        <div class="product-img-wrapper">
+                            <span class="product-tag">New</span>
+                            <img src="assets/images/products/dessert4.jpeg" alt="Coconut Classic Protein Bar"
+                                class="product-img">
+                            <button class="quick-view-btn">Quick View</button>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-meta">
+                                <span class="product-category">Protein Bar</span>
+                                <span class="calorie-badge">Refreshing</span>
+                            </div>
+                            <h3 class="product-name">Coconut Classic Protein Bar</h3>
+                            <p class="product-desc">Toasted coconut flakes and creamy coconut butter blended with oats and natural sweetness. A tropical bite that satisfies every time.</p>
+
+                            <div class="product-highlights">
+                                <span class="highlight-chip">Coconut Rich</span>
+                                <span class="highlight-chip">Dairy-Free</span>
+                                <span class="highlight-chip">Tropical Taste</span>
+                            </div>
+
+                            <!-- Product Details for Modal (Stored cleanly in HTML) -->
+                            <div class="product-extra-data" hidden>
+                                <span class="extra-calories">190 kcal</span>
+                                <span class="extra-protein">8g</span>
+                                <span class="extra-fiber">4g</span>
+                                <span class="extra-ingredients">Toasted coconut flakes, coconut butter, organic oats, Medjool dates, vanilla extract, a pinch of sea salt.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Note to User / Custom Order Banner -->
+                <div class="custom-orders-callout reveal-on-scroll">
+                    <div class="callout-icon-svg">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z" />
+                        </svg>
+                    </div>
+                    <div class="callout-content">
+                        <h4>Every batch is freshly made to order</h4>
+                        <p>We believe in absolute freshness. Connect with us on Instagram to see current batch
+                            availability and discover seasonal flavors.</p>
+                    </div>
+                    <a href="#instagram" class="btn btn-callout-cta">
+                        <span>Check Availability</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CUSTOMER REVIEWS (WHATSAPP TESTIMONIALS) SECTION -->
+        <section class="reviews-section" id="reviews">
+            <div class="container">
+                <div class="section-header text-center reveal-on-scroll">
+                    <span class="sub-heading">Real Community Love</span>
+                    <h2 class="section-title">Words from our happy eaters.</h2>
+                    <p class="section-intro">
+                        Authentic customer messages straight from our WhatsApp community. Click on any review to view
+                        the full message screenshot.
+                    </p>
+                </div>
+
+                <div class="reviews-gallery-wrapper">
+                    <div class="reviews-grid" id="reviewsGrid">
+
+                        <!-- Review Card 1 (WhatsApp Mock Card & Screenshot Slot) -->
+                        <div class="review-card reveal-on-scroll" data-review-img="assets/images/reviews/review1.jpeg">
+                            <div class="whatsapp-card-header">
+                                <div class="user-avatar-initials">JO</div>
+                                <div class="user-meta">
+                                    <div class="user-name">JoynFit Customer</div>
+                                    <div class="user-status">Verified Purchase</div>
+                                </div>
+                                <div class="wa-brand-icon" title="WhatsApp Verified Feedback">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366">
+                                        <path
+                                            d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="wa-chat-bubble">
+                                <p class="wa-message-text">
+                                    "Amazing healthy desserts! The taste is incredible and I feel great after eating
+                                    them."
+                                </p>
+                                <div class="wa-message-footer">
+                                    <span class="wa-checkmarks">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="review-card-action">
+                                <span class="review-view-hint">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                                    </svg>
+                                    Tap to view screenshot
+                                </span>
+                                <span class="rating-stars" aria-label="5 stars">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                    </svg>
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                    </svg>
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                    </svg>
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                    </svg>
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Review Card 2 -->
+                        <div class="review-card reveal-on-scroll" data-review-img="assets/images/reviews/review4.jpeg">
+                            <div class="whatsapp-card-header">
+                                <div class="user-avatar-initials">JC</div>
+                                <div class="user-meta">
+                                    <div class="user-name">JoynFit Customer</div>
+                                    <div class="user-status">Verified Purchase</div>
+                                </div>
+                                <div class="wa-brand-icon" title="WhatsApp Verified Feedback">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366">
+                                        <path
+                                            d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="wa-chat-bubble">
+                                <p class="wa-message-text">
+                                    "Absolutely love these treats! Perfect balance of taste and health."
+                                </p>
+                                <div class="wa-message-footer">
+                                    <span class="wa-checkmarks">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="review-card-action">
+                                <span class="review-view-hint">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                                    </svg>
+                                    Tap to view screenshot
+                                </span>
+                                <span class="rating-stars" aria-label="5 stars">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                    </svg>
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                    </svg>
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                    </svg>
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                    </svg>
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Review Card 3 -->
+                        <div class="review-card reveal-on-scroll" data-review-img="assets/images/reviews/review7.jpeg">
+                            <div class="whatsapp-card-header">
+                                <div class="user-avatar-initials">JC</div>
+                                <div class="user-meta">
+                                    <div class="user-name">JoynFit Customer</div>
+                                    <div class="user-status">Verified Purchase</div>
+                                </div>
+                                <div class="wa-brand-icon" title="WhatsApp Verified Feedback">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366">
+                                        <path
+                                            d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="wa-chat-bubble">
+                                <p class="wa-message-text">
+                                    "My go-to healthy snack! Always fresh and beautifully packaged."
+                                </p>
+                                <div class="wa-message-footer">
+                                    <span class="wa-checkmarks">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="review-card-action">
+                                <span class="review-view-hint">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                                    </svg>
+                                    Tap to view screenshot
+                                </span>
+                                <span class="rating-stars" aria-label="5 stars">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                    </svg>
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                    </svg>
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                    </svg>
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                    </svg>
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CUSTOMER REVIEWS VIDEO SPOTLIGHT SECTION -->
+        <section class="video-section" id="video-review">
+            <div class="container">
+                <div class="video-showcase-box reveal-on-scroll">
+                    <div class="video-header-content text-center">
+                        <span class="sub-heading">Featured Video</span>
+                        <h2 class="section-title">Hear what our community says.</h2>
+                        <p class="section-intro">
+                            Watch real feedback, unboxing, and tasting reactions from dessert lovers who made the switch
+                            to JoynFit.
+                        </p>
+                    </div>
+
+                    <div class="video-player-container">
+                        <!-- Video Player Frame -->
+                        <div class="video-frame" id="videoPlayerFrame">
+                            <video id="reviewVideo" preload="metadata" poster="assets/images/products/dessert1.jpeg">
+                                <source src="assets/video/joynfit video.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+
+                            <!-- Video Glass Overlay Controls -->
+                            <div class="video-overlay" id="videoOverlay">
+                                <button class="play-pulse-btn" id="playVideoBtn"
+                                    aria-label="Play Customer Review Video">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                    </svg>
+                                </button>
+                                <span class="video-badge">Watch Customer Experience (1:20)</span>
+                            </div>
+
+                            <!-- Video Inline Controls Bar -->
+                            <div class="video-control-bar" id="videoControlBar">
+                                <button class="video-btn" id="miniPlayBtn" aria-label="Play or Pause">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                    </svg>
+                                </button>
+                                <div class="video-progress-bar">
+                                    <div class="video-progress-fill" id="videoProgressFill"></div>
+                                </div>
+                                <button class="video-btn" id="muteBtn" aria-label="Toggle Sound">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                                    </svg>
+                                </button>
+                                <button class="video-btn" id="fullscreenBtn" aria-label="Toggle Fullscreen">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path
+                                            d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Video highlights side card -->
+                        <div class="video-side-stats">
+                            <div class="video-stat-item">
+                                <span class="stat-number">100%</span>
+                                <span class="stat-label">Real Feedback</span>
+                                <p>Authentic reviews from regular clients enjoying our healthy creations every week.</p>
+                            </div>
+                            <div class="video-stat-item">
+                                <span class="stat-number">0</span>
+                                <span class="stat-label">Refined Sugars</span>
+                                <p>Loved by health enthusiasts, athletes, and anyone wanting sweet pleasure without
+                                    guilt.</p>
+                            </div>
+                            <div class="video-stat-item">
+                                <span class="stat-number">4.9/5</span>
+                                <span class="stat-label">Average Satisfaction</span>
+                                <p>Consistently praised for luxurious textures and authentic gourmet flavors.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INSTAGRAM / COMMUNITY SECTION -->
+        <section class="instagram-section" id="instagram">
+            <div class="container">
+                <div class="insta-banner-box reveal-on-scroll">
+                    <div class="insta-content">
+                        <span class="sub-heading">Follow The Journey</span>
+                        <h2 class="section-title">Connect with JoynFit on Instagram.</h2>
+                        <p class="section-intro">
+                            Join our growing community. Follow <strong>@joynfit</strong> for daily batch drops,
+                            behind-the-scenes ingredient sourcing, healthy dessert inspirations, and direct ordering.
+                        </p>
+                        <div class="insta-actions">
+                            <a href="https://www.instagram.com/joynfit.eg?stkn=MWc2dnRtcTJsa2xocQ==" target="_blank"
+                                rel="noopener noreferrer" class="btn btn-instagram">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg>
+                                <span>Instagram</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Instagram Visual Grid Cards -->
+                    <div class="insta-grid">
+                        <a href="https://www.instagram.com/joynfit.eg?stkn=MWc2dnRtcTJsa2xocQ==" target="_blank"
+                            rel="noopener noreferrer" class="insta-post-card">
+                            <img src="assets/images/products/dessert1.jpeg" alt="Peanut Chocolate Protein Bar on Instagram">
+                            <div class="insta-overlay">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+                                    <path
+                                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                </svg>
+                            </div>
+                        </a>
+                        <a href="https://www.instagram.com/joynfit.eg?stkn=MWc2dnRtcTJsa2xocQ==" target="_blank"
+                            rel="noopener noreferrer" class="insta-post-card">
+                            <img src="assets/images/products/dessert2.jpeg"
+                                alt="Pumpkin Seeds Protein Bar on Instagram">
+                            <div class="insta-overlay">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+                                    <path
+                                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                </svg>
+                            </div>
+                        </a>
+                        <a href="https://www.instagram.com/joynfit.eg?stkn=MWc2dnRtcTJsa2xocQ==" target="_blank"
+                            rel="noopener noreferrer" class="insta-post-card">
+                            <img src="assets/images/products/dessert3.jpeg" alt="Peanut Classic Protein Bar on Instagram">
+                            <div class="insta-overlay">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+                                    <path
+                                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                </svg>
+                            </div>
+                        </a>
+                        <a href="https://www.instagram.com/joynfit.eg?stkn=MWc2dnRtcTJsa2xocQ==" target="_blank"
+                            rel="noopener noreferrer" class="insta-post-card">
+                            <img src="assets/images/products/dessert4.jpeg" alt="Coconut Classic Protein Bar on Instagram">
+                            <div class="insta-overlay">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+                                    <path
+                                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                                </svg>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <div class="footer-brand-col">
+                <a href="#hero" class="brand-logo footer-logo" aria-label="JoynFit Home">
+                    <img src="assets/images/brand/joynfit_logo.png" alt="JoynFit" class="footer-logo-img">
+                </a>
+                <p class="footer-bio">
+                    Artisanal healthy dessert brand created with care. Enjoy uncompromised sweet indulgence crafted from
+                    natural, clean, and nutritious ingredients.
+                </p>
+            </div>
+
+            <div class="footer-links-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="#about">Our Story</a></li>
+                    <li><a href="#products">Dessert Creations</a></li>
+                    <li><a href="#reviews">Customer Reviews</a></li>
+                    <li><a href="#video-review">Video Testimonials</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-col">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="#instagram">Instagram (@joynfit)</a></li>
+                    <li><a href="#reviews">WhatsApp Feedback</a></li>
+                    <li><a href="#products">Batch Inquiries</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-badge-col">
+                <h4>The JoynFit Promise</h4>
+                <div class="footer-promise-box">
+                    <span class="promise-item">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 2L9.5 9.5 2 12l7.5 2.5L12 22l2.5-7.5L22 12l-7.5-2.5z" />
+                        </svg>
+                        100% Wholesome Ingredients
+                    </span>
+                    <span class="promise-item">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+                        </svg>
+                        Free from Refined Sugars
+                    </span>
+                    <span class="promise-item">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        </svg>
+                        Clean, Natural Indulgence
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom text-center">
+            <div class="container">
+                <p>© 2026 JoynFit Healthy Desserts. All rights reserved. Made with calm & intention.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX MODAL FOR WHATSAPP REVIEWS (Fully in HTML) -->
+    <div class="modal-backdrop" id="reviewLightboxModal" aria-hidden="true" role="dialog">
+        <div class="lightbox-dialog">
+            <button class="modal-close-btn" id="closeReviewModalBtn" aria-label="Close Preview">&times;</button>
+            <div class="lightbox-body">
+                <img src="" alt="WhatsApp Customer Review Full Screenshot" id="lightboxReviewImg" class="lightbox-img">
+                <div class="lightbox-caption">
+                    <strong id="lightboxReviewName">Customer Review</strong>
+                    <p id="lightboxReviewQuote">WhatsApp verified feedback from our community.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUICK VIEW DETAIL MODAL (Fully in HTML, no HTML strings in JS) -->
+    <div class="modal-backdrop" id="productModal" aria-hidden="true" role="dialog">
+        <div class="product-modal-dialog">
+            <button class="modal-close-btn" id="closeProductModalBtn"
+                aria-label="Close Product Details">&times;</button>
+            <div class="product-modal-grid">
+                <div class="modal-img-col">
+                    <img id="modalProductImg" src="" alt="Product Detail">
+                </div>
+                <div class="modal-details-col">
+                    <span class="modal-meta-category" id="modalProductCategory"></span>
+                    <h3 class="modal-title" id="modalProductTitle"></h3>
+                    <p class="modal-desc" id="modalProductDesc"></p>
+
+                    <div class="modal-nutrition-grid">
+                        <div class="nutrition-item">
+                            <strong id="modalProductCalories"></strong>
+                            <span>Energy</span>
+                        </div>
+                        <div class="nutrition-item">
+                            <strong id="modalProductProtein"></strong>
+                            <span>Clean Protein</span>
+                        </div>
+                        <div class="nutrition-item">
+                            <strong id="modalProductFiber"></strong>
+                            <span>Dietary Fiber</span>
+                        </div>
+                    </div>
+
+                    <div class="modal-ingredients">
+                        <h5>Wholesome Ingredients</h5>
+                        <p id="modalProductIngredients"></p>
+                    </div>
+
+                    <a href="#instagram" class="btn btn-primary" id="modalProductCta">
+                        Inquire / Request Batch on Instagram
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript logic -->
+    <script src="landingPage.js"></script>
+</body>
+
+</html>
