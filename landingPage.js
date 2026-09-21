@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
           videoOverlay.classList.add('hidden');
           if (miniPlayBtn) miniPlayBtn.innerHTML = ICONS.pause;
         }).catch(() => {
-          alert('Please place your customer review video in assets/video/joynfit video.mp4');
+          alert('Please place your customer review video in assets/video/joynfit-video.mp4');
         });
       } else {
         video.pause();
