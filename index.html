@@ -15,7 +15,10 @@
         href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="landingPage.css?v=20260921c">
+    <link rel="stylesheet" href="landingPage.css?v=20260922b">
+    <style>
+      [data-cms-hidden="true"] { display: none !important; }
+    </style>
 </head>
 
 <body class="js-pending">
@@ -29,7 +32,7 @@
     <header class="site-header" id="header">
         <div class="nav-container">
             <a href="#hero" class="brand-logo" aria-label="JoynFit Home">
-                <img src="assets/images/brand/joynfit_logo.png" alt="JoynFit" class="navbar-logo-img">
+                <img src="assets/images/brand/joynfit_logo.png" alt="JoynFit" class="navbar-logo-img" data-cms-media="logo">
             </a>
 
             <nav class="desktop-nav" aria-label="Main Navigation">
@@ -49,7 +52,7 @@
                 </div>
 
                 <a href="https://www.instagram.com/joynfit.eg?stkn=MWc2dnRtcTJsa2xocQ=="
-                    class="btn btn-secondary nav-btn">
+                    class="btn btn-secondary nav-btn" data-cms-link="instagram">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
                         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -83,7 +86,7 @@
 
     <main>
         <!-- HERO SECTION -->
-        <section class="hero-section animate-section" id="hero" data-section-anim="hero">
+        <section class="hero-section animate-section" id="hero" data-section-anim="hero" data-cms-section="hero">
             <div class="container hero-grid">
                 <!-- Hero Content Column -->
                 <div class="hero-content">
@@ -156,7 +159,7 @@
                         <!-- Floating Hero Image -->
                         <div class="floating-hero-image-card">
                             <img src="assets/images/products/dessert1.jpeg" alt="JoynFit Layered Chia & Berry Parfait"
-                                class="hero-main-img" id="heroMainImage">
+                                class="hero-main-img" id="heroMainImage" data-cms-media="heroImage">
 
                             <!-- Floating Micro Glass Badges -->
                             <div class="floating-badge badge-top-right">
@@ -225,7 +228,7 @@
         </section>
 
         <!-- BRAND STORY & PILLARS SECTION -->
-        <section class="about-section animate-section" id="about" data-section-anim="about">
+        <section class="about-section animate-section" id="about" data-section-anim="about" data-cms-section="about">
             <div class="container">
                 <div class="section-header text-center">
                     <span class="seq-item sub-heading" data-i18n="about.eyebrow">The JoynFit Philosophy</span>
@@ -294,7 +297,7 @@
         </section>
 
         <!-- PRODUCTS SHOWCASE SECTION -->
-        <section class="products-section animate-section" id="products" data-section-anim="products">
+        <section class="products-section animate-section" id="products" data-section-anim="products" data-cms-section="products">
             <div class="container">
                 <div class="products-header">
                     <div>
@@ -315,7 +318,7 @@
                         <div class="product-img-wrapper">
                             <span class="product-tag" data-i18n="p1.tag">Bestseller</span>
                             <img src="assets/images/products/dessert1.jpeg" alt="Peanut Chocolate Protein Bar"
-                                class="product-img">
+                                class="product-img" data-cms-media="product1">
                             <button class="quick-view-btn" data-i18n="products.quick">Quick View</button>
                         </div>
                         <div class="product-info">
@@ -347,7 +350,7 @@
                         <div class="product-img-wrapper">
                             <span class="product-tag" data-i18n="p2.tag">Seasonal</span>
                             <img src="assets/images/products/dessert2.jpeg" alt="Pumpkin Seeds Protein Bar"
-                                class="product-img">
+                                class="product-img" data-cms-media="product2">
                             <button class="quick-view-btn" data-i18n="products.quick">Quick View</button>
                         </div>
                         <div class="product-info">
@@ -379,7 +382,7 @@
                         <div class="product-img-wrapper">
                             <span class="product-tag" data-i18n="p3.tag">Protein Favorite</span>
                             <img src="assets/images/products/dessert3.jpeg" alt="Peanut Classic Protein Bar"
-                                class="product-img">
+                                class="product-img" data-cms-media="product3">
                             <button class="quick-view-btn" data-i18n="products.quick">Quick View</button>
                         </div>
                         <div class="product-info">
@@ -411,7 +414,7 @@
                         <div class="product-img-wrapper">
                             <span class="product-tag" data-i18n="p4.tag">New</span>
                             <img src="assets/images/products/dessert4.jpeg" alt="Coconut Classic Protein Bar"
-                                class="product-img">
+                                class="product-img" data-cms-media="product4">
                             <button class="quick-view-btn" data-i18n="products.quick">Quick View</button>
                         </div>
                         <div class="product-info">
@@ -467,7 +470,7 @@
         </section>
 
         <!-- CUSTOMER REVIEWS (WHATSAPP TESTIMONIALS) SECTION -->
-        <section class="reviews-section animate-section" id="reviews" data-section-anim="reviews">
+        <section class="reviews-section animate-section" id="reviews" data-section-anim="reviews" data-cms-section="reviews">
             <div class="container">
                 <div class="section-header text-center">
                     <span class="seq-item sub-heading" data-i18n="reviews.eyebrow">Real Community Love</span>
@@ -482,7 +485,7 @@
                     <div class="reviews-grid" id="reviewsGrid">
 
                         <!-- Review Card 1 (WhatsApp Mock Card & Screenshot Slot) -->
-                        <div class="review-card reveal-on-scroll seq-item" data-review-img="assets/images/reviews/review1.jpeg">
+                        <div class="review-card reveal-on-scroll seq-item" data-review-img="assets/images/reviews/review1.jpeg" data-cms-media="review1" data-cms-attr="data-review-img">
                             <div class="whatsapp-card-header">
                                 <div class="user-avatar-initials">JO</div>
                                 <div class="user-meta">
@@ -550,7 +553,7 @@
                         </div>
 
                         <!-- Review Card 2 -->
-                        <div class="review-card reveal-on-scroll seq-item" data-review-img="assets/images/reviews/review4.jpeg">
+                        <div class="review-card reveal-on-scroll seq-item" data-review-img="assets/images/reviews/review4.jpeg" data-cms-media="review2" data-cms-attr="data-review-img">
                             <div class="whatsapp-card-header">
                                 <div class="user-avatar-initials">JC</div>
                                 <div class="user-meta">
@@ -617,7 +620,7 @@
                         </div>
 
                         <!-- Review Card 3 -->
-                        <div class="review-card reveal-on-scroll seq-item" data-review-img="assets/images/reviews/review7.jpeg">
+                        <div class="review-card reveal-on-scroll seq-item" data-review-img="assets/images/reviews/review7.jpeg" data-cms-media="review3" data-cms-attr="data-review-img">
                             <div class="whatsapp-card-header">
                                 <div class="user-avatar-initials">JC</div>
                                 <div class="user-meta">
@@ -689,7 +692,7 @@
         </section>
 
         <!-- CUSTOMER REVIEWS VIDEO SPOTLIGHT SECTION -->
-        <section class="video-section animate-section" id="video-review" data-section-anim="video">
+        <section class="video-section animate-section" id="video-review" data-section-anim="video" data-cms-section="video">
             <div class="container">
                 <div class="video-showcase-box">
                     <div class="video-header-content text-center">
@@ -704,8 +707,8 @@
                     <div class="video-player-container">
                         <!-- Video Player Frame -->
                         <div class="video-frame seq-item" id="videoPlayerFrame">
-                            <video id="reviewVideo" preload="metadata" poster="assets/images/products/dessert1.jpeg">
-                                <source src="assets/video/joynfit-video.mp4" type="video/mp4">
+                            <video id="reviewVideo" preload="metadata" poster="assets/images/products/dessert1.jpeg" data-cms-media="videoPoster">
+                                <source src="assets/video/joynfit-video.mp4" type="video/mp4" data-cms-media="videoSrc">
                                 Your browser does not support the video tag.
                             </video>
 
@@ -773,7 +776,7 @@
         </section>
 
         <!-- INSTAGRAM / COMMUNITY SECTION -->
-        <section class="instagram-section animate-section" id="instagram" data-section-anim="instagram">
+        <section class="instagram-section animate-section" id="instagram" data-section-anim="instagram" data-cms-section="instagram">
             <div class="container">
                 <div class="insta-banner-box">
                     <div class="insta-content">
@@ -785,7 +788,7 @@
                         </p>
                         <div class="insta-actions seq-item">
                             <a href="https://www.instagram.com/joynfit.eg?stkn=MWc2dnRtcTJsa2xocQ==" target="_blank"
-                                rel="noopener noreferrer" class="btn btn-instagram">
+                                rel="noopener noreferrer" class="btn btn-instagram" data-cms-link="instagram">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -800,8 +803,8 @@
                     <!-- Instagram Visual Grid Cards -->
                     <div class="insta-grid">
                         <a href="https://www.instagram.com/joynfit.eg?stkn=MWc2dnRtcTJsa2xocQ==" target="_blank"
-                            rel="noopener noreferrer" class="insta-post-card seq-item">
-                            <img src="assets/images/products/dessert1.jpeg" alt="Peanut Chocolate Protein Bar on Instagram">
+                            rel="noopener noreferrer" class="insta-post-card seq-item" data-cms-link="instagram">
+                            <img src="assets/images/products/dessert1.jpeg" alt="Peanut Chocolate Protein Bar on Instagram" data-cms-media="insta1">
                             <div class="insta-overlay">
                                 <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
                                     <path
@@ -810,9 +813,9 @@
                             </div>
                         </a>
                         <a href="https://www.instagram.com/joynfit.eg?stkn=MWc2dnRtcTJsa2xocQ==" target="_blank"
-                            rel="noopener noreferrer" class="insta-post-card seq-item">
+                            rel="noopener noreferrer" class="insta-post-card seq-item" data-cms-link="instagram">
                             <img src="assets/images/products/dessert2.jpeg"
-                                alt="Pumpkin Seeds Protein Bar on Instagram">
+                                alt="Pumpkin Seeds Protein Bar on Instagram" data-cms-media="insta2">
                             <div class="insta-overlay">
                                 <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
                                     <path
@@ -821,8 +824,8 @@
                             </div>
                         </a>
                         <a href="https://www.instagram.com/joynfit.eg?stkn=MWc2dnRtcTJsa2xocQ==" target="_blank"
-                            rel="noopener noreferrer" class="insta-post-card seq-item">
-                            <img src="assets/images/products/dessert3.jpeg" alt="Peanut Classic Protein Bar on Instagram">
+                            rel="noopener noreferrer" class="insta-post-card seq-item" data-cms-link="instagram">
+                            <img src="assets/images/products/dessert3.jpeg" alt="Peanut Classic Protein Bar on Instagram" data-cms-media="insta3">
                             <div class="insta-overlay">
                                 <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
                                     <path
@@ -831,8 +834,8 @@
                             </div>
                         </a>
                         <a href="https://www.instagram.com/joynfit.eg?stkn=MWc2dnRtcTJsa2xocQ==" target="_blank"
-                            rel="noopener noreferrer" class="insta-post-card seq-item">
-                            <img src="assets/images/products/dessert4.jpeg" alt="Coconut Classic Protein Bar on Instagram">
+                            rel="noopener noreferrer" class="insta-post-card seq-item" data-cms-link="instagram">
+                            <img src="assets/images/products/dessert4.jpeg" alt="Coconut Classic Protein Bar on Instagram" data-cms-media="insta4">
                             <div class="insta-overlay">
                                 <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
                                     <path
@@ -847,11 +850,11 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="site-footer animate-section" data-section-anim="footer">
+    <footer class="site-footer animate-section" data-section-anim="footer" data-cms-section="footer">
         <div class="container footer-content">
             <div class="footer-brand-col seq-item">
                 <a href="#hero" class="brand-logo footer-logo" aria-label="JoynFit Home">
-                    <img src="assets/images/brand/joynfit_logo.png" alt="JoynFit" class="footer-logo-img">
+                    <img src="assets/images/brand/joynfit_logo.png" alt="JoynFit" class="footer-logo-img" data-cms-media="logo">
                 </a>
                 <p class="footer-bio" data-i18n="footer.bio">
                     Artisanal healthy dessert brand created with care. Enjoy uncompromised sweet indulgence crafted from
@@ -970,8 +973,9 @@
     </div>
 
     <!-- JavaScript logic -->
-    <script src="i18n.js?v=20260921c"></script>
-    <script src="landingPage.js?v=20260921c"></script>
+    <script src="cms.js?v=20260922c"></script>
+    <script src="i18n.js?v=20260922c"></script>
+    <script src="landingPage.js?v=20260922c"></script>
 </body>
 
 </html>

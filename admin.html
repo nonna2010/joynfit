@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JoynFit Admin — Content Control</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="admin.css?v=20260922c">
+</head>
+
+<body>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Login -->
+  <section class="login-screen" id="loginScreen">
+    <div class="login-card">
+      <div class="login-brand">
+        <img src="assets/images/brand/joynfit_logo.png" alt="JoynFit" class="login-logo">
+        <h1>Content Control</h1>
+        <p>Sign in to edit any section of the JoynFit website.</p>
+      </div>
+      <form id="loginForm" class="login-form" autocomplete="on">
+        <label for="loginPassword">Password</label>
+        <input id="loginPassword" name="password" type="password" required placeholder="Enter admin password"
+          autocomplete="current-password">
+        <p id="loginError" class="login-error" hidden></p>
+        <button type="submit" class="btn btn-primary">Enter Admin</button>
+      </form>
+      <p class="login-hint">Default password: <code>joynfit</code> — change it under Site Settings after login.</p>
+      <a class="login-back" href="index.html">← Back to website</a>
+    </div>
+  </section>
+
+  <!-- Admin shell -->
+  <div class="admin-app" id="adminApp" hidden>
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <img src="assets/images/brand/joynfit_logo.png" alt="" class="sidebar-logo">
+        <div>
+          <strong>JoynFit Admin</strong>
+          <span>Section control</span>
+        </div>
+      </div>
+      <nav class="sidebar-nav" id="sidebarNav" aria-label="Sections"></nav>
+      <div class="sidebar-footer">
+        <a href="index.html" target="_blank" rel="noopener" class="btn btn-ghost">Preview site ↗</a>
+        <button type="button" class="btn btn-ghost" id="logoutBtn">Log out</button>
+      </div>
+    </aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <h2 id="editorTitle">Section</h2>
+          <p id="editorDesc" class="topbar-desc"></p>
+        </div>
+        <div class="topbar-actions">
+          <span id="dirtyDot" class="dirty-dot" hidden title="Unsaved changes"></span>
+          <button type="button" class="btn btn-ghost" id="importBtn">Import</button>
+          <input type="file" id="importFile" accept="application/json,.json" hidden>
+          <button type="button" class="btn btn-ghost" id="exportBtn">Export</button>
+          <button type="button" class="btn btn-danger" id="resetBtn">Reset</button>
+          <button type="button" class="btn btn-primary" id="saveBtn">Save changes</button>
+        </div>
+      </header>
+
+      <div class="editor-toolbar">
+        <div class="lang-tabs" id="langTabs" hidden>
+          <button type="button" class="lang-tab is-active" data-lang="en">English</button>
+          <button type="button" class="lang-tab" data-lang="ar">العربية</button>
+        </div>
+        <p class="meta-line" id="updatedAt"></p>
+      </div>
+
+      <main class="editor-body" id="editorBody"></main>
+    </div>
+  </div>
+
+  <script>window.JOYNFIT_ADMIN = true;</script>
+  <script src="cms.js?v=20260922c"></script>
+  <script src="i18n.js?v=20260922c"></script>
+  <script src="admin.js?v=20260922c"></script>
+</body>
+
+</html>

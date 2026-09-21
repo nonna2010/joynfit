@@ -13,3 +13,14 @@ python3 -m http.server 8080
 ```
 
 Then visit http://localhost:8080
+
+## Admin panel
+
+Control any website section from the content admin:
+
+- Open http://localhost:8080/admin.html
+- Default password: `joynfit` (change it under **Site Settings**)
+- Edit texts (EN / AR), images, Instagram URL, video, fonts, text colors, and section visibility
+- Click **Save changes**, then refresh the public site
+
+Changes are stored in this browser’s `localStorage`. Use **Export** / **Import** to back up or move content between devices.

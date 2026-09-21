@@ -48,6 +48,7 @@
   /* Typography */
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-arabic: 'Cairo', sans-serif;
 
   /* Transitions */
   --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -2526,7 +2527,7 @@ html[dir="rtl"] .insta-content .sub-heading::after {
 
 html[dir="rtl"] body,
 body.is-ar {
-  font-family: "Cairo", var(--font-sans);
+  font-family: var(--font-arabic), var(--font-sans);
 }
 
 html[dir="rtl"] .hero-title,
@@ -2537,7 +2538,7 @@ html[dir="rtl"] h1,
 html[dir="rtl"] h2,
 html[dir="rtl"] h3,
 html[dir="rtl"] h4 {
-  font-family: "Cairo", var(--font-serif);
+  font-family: var(--font-arabic), var(--font-serif);
   letter-spacing: 0;
 }
 

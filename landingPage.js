@@ -51,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const STEP_MS = prefersReducedMotion ? 0 : 340;
 
-  const revealElements = document.querySelectorAll('.reveal-on-scroll');
   const animateSections = document.querySelectorAll('.animate-section');
 
   const showOneByOne = (elements, step = STEP_MS, startDelay = 0) => {

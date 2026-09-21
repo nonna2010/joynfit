@@ -244,7 +244,10 @@
   };
 
   function applyLanguage(lang) {
-    const dict = translations[lang] || translations.en;
+    const base = translations[lang] || translations.en;
+    const dict = window.JoynFitCMS?.getMergedDict
+      ? window.JoynFitCMS.getMergedDict(base, lang)
+      : base;
     const isRtl = lang === 'ar';
 
     document.documentElement.lang = lang;
@@ -277,9 +280,16 @@
     try {
       localStorage.setItem(STORAGE_KEY, lang);
     } catch (_) { /* ignore */ }
+
+    // Re-apply CMS media/visibility after language swap
+    if (window.JoynFitCMS?.applyToPage) {
+      window.JoynFitCMS.applyToPage();
+    }
   }
 
   function init() {
+    if (window.JOYNFIT_ADMIN) return;
+
     document.querySelectorAll('[data-set-lang]').forEach((btn) => {
       btn.addEventListener('click', () => {
         applyLanguage(btn.getAttribute('data-set-lang'));
