@@ -43,8 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 2. Scroll Reveal Animations (IntersectionObserver) + staggered delays
+  // 2. Professional section + scroll reveal animations
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
+  const animateSections = document.querySelectorAll('.animate-section');
 
   const staggerGroups = [
     document.querySelectorAll('.pillars-grid .reveal-on-scroll'),
@@ -54,8 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   staggerGroups.forEach((group) => {
     group.forEach((el, index) => {
-      el.style.setProperty('--reveal-delay', `${index * 110}ms`);
+      el.style.setProperty('--reveal-delay', `${120 + index * 130}ms`);
       if (index % 2 === 1) el.classList.add('reveal-scale');
+      else if (index % 3 === 0) el.classList.add('reveal-from-left');
+      else el.classList.add('reveal-from-right');
     });
   });
 
@@ -65,19 +70,47 @@ document.addEventListener('DOMContentLoaded', () => {
   if (heroVisual) heroVisual.classList.add('reveal-from-right');
 
   const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
     });
   }, {
     root: null,
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
+    threshold: 0.14,
+    rootMargin: '0px 0px -8% 0px'
   });
 
-  revealElements.forEach(el => revealObserver.observe(el));
+  revealElements.forEach((el) => revealObserver.observe(el));
+
+  const sectionObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-inview');
+      // Cascade nested reveals slightly after section enters
+      entry.target.querySelectorAll('.reveal-on-scroll:not(.is-visible)').forEach((child, i) => {
+        window.setTimeout(() => child.classList.add('is-visible'), prefersReducedMotion ? 0 : 80 + i * 70);
+      });
+      observer.unobserve(entry.target);
+    });
+  }, {
+    root: null,
+    threshold: 0.18,
+    rootMargin: '0px 0px -10% 0px'
+  });
+
+  animateSections.forEach((section) => {
+    if (section.id === 'hero') {
+      section.classList.add('is-inview');
+      return;
+    }
+    sectionObserver.observe(section);
+  });
+
+  if (prefersReducedMotion) {
+    revealElements.forEach((el) => el.classList.add('is-visible'));
+    animateSections.forEach((el) => el.classList.add('is-inview'));
+  }
 
   // Header blur on scroll
   const siteHeader = document.getElementById('header');
