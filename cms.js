@@ -197,6 +197,89 @@
     return FONT_CATALOG[id] || FONT_CATALOG[fallbackId];
   }
 
+  const IMAGE_UPLOAD_MAX_EDGE = 1400;
+  const IMAGE_UPLOAD_QUALITY = 0.8;
+  const VIDEO_UPLOAD_MAX_BYTES = 4 * 1024 * 1024;
+
+  function isImageFile(file) {
+    return !!file && (/^image\//.test(file.type) || /\.(jpe?g|png|webp|gif|svg)$/i.test(file.name || ''));
+  }
+
+  function isVideoFile(file) {
+    return !!file && (/^video\//.test(file.type) || /\.(mp4|webm|mov)$/i.test(file.name || ''));
+  }
+
+  function readFileAsDataUrl(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result || ''));
+      reader.onerror = () => reject(new Error('Could not read this file'));
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function loadImageElement(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error('Could not process this image'));
+      img.src = src;
+    });
+  }
+
+  async function compressImageFile(file, maxEdge = IMAGE_UPLOAD_MAX_EDGE, quality = IMAGE_UPLOAD_QUALITY) {
+    const original = await readFileAsDataUrl(file);
+    if (/^image\/svg\+xml/i.test(file.type)) return original;
+
+    const img = await loadImageElement(original);
+    const scale = Math.min(1, maxEdge / Math.max(img.naturalWidth || img.width, img.naturalHeight || img.height));
+    const width = Math.max(1, Math.round((img.naturalWidth || img.width) * scale));
+    const height = Math.max(1, Math.round((img.naturalHeight || img.height) * scale));
+
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return original;
+    ctx.drawImage(img, 0, 0, width, height);
+
+    const preferPng = /png$/i.test(file.type) && hasTransparency(ctx, width, height);
+    return canvas.toDataURL(preferPng ? 'image/png' : 'image/jpeg', quality);
+  }
+
+  function hasTransparency(ctx, width, height) {
+    try {
+      const sample = ctx.getImageData(0, 0, Math.min(width, 32), Math.min(height, 32)).data;
+      for (let i = 3; i < sample.length; i += 4) {
+        if (sample[i] < 250) return true;
+      }
+    } catch (_) { /* ignore tainted canvas */ }
+    return false;
+  }
+
+  async function fileToMediaValue(file, kind = 'image') {
+    if (!file) throw new Error('No file selected');
+
+    if (kind === 'video' || isVideoFile(file)) {
+      if (file.size > VIDEO_UPLOAD_MAX_BYTES) {
+        throw new Error('Video is too large (max 4MB). Host it online and paste the URL instead.');
+      }
+      return readFileAsDataUrl(file);
+    }
+
+    if (!isImageFile(file)) {
+      throw new Error('Please choose an image file (JPG, PNG, WEBP, or GIF)');
+    }
+    if (file.size > 12 * 1024 * 1024) {
+      throw new Error('Image is too large (max 12MB before compression)');
+    }
+    return compressImageFile(file);
+  }
+
+  function isDataMedia(value) {
+    return typeof value === 'string' && value.startsWith('data:');
+  }
+
   /** Field schema used by the admin panel (grouped by section). */
   const FIELD_SCHEMA = {
     settings: {
@@ -204,7 +287,7 @@
       description: 'Global links, branding media, and admin access.',
       fields: [
         { key: 'instagram', group: 'links', type: 'url', label: 'Instagram URL' },
-        { key: 'logo', group: 'media', type: 'text', label: 'Logo image path / URL' },
+        { key: 'logo', group: 'media', type: 'text', label: 'Logo image', upload: 'image' },
         { key: 'password', group: 'meta', type: 'password', label: 'Admin password' }
       ]
     },
@@ -296,7 +379,7 @@
         { key: 'hero.badge2_title', type: 'text', label: 'Badge 2 title', i18n: true },
         { key: 'hero.badge2_sub', type: 'text', label: 'Badge 2 subtitle', i18n: true },
         { key: 'hero.scroll', type: 'text', label: 'Scroll hint', i18n: true },
-        { key: 'heroImage', group: 'media', type: 'text', label: 'Hero image path / URL' }
+        { key: 'heroImage', group: 'media', type: 'text', label: 'Hero image', upload: 'image' }
       ]
     },
     about: {
@@ -336,7 +419,7 @@
         { key: 'p1.h2', type: 'text', label: 'Product 1 chip 2', i18n: true },
         { key: 'p1.h3', type: 'text', label: 'Product 1 chip 3', i18n: true },
         { key: 'p1.ing', type: 'textarea', label: 'Product 1 ingredients', i18n: true },
-        { key: 'product1', group: 'media', type: 'text', label: 'Product 1 image' },
+        { key: 'product1', group: 'media', type: 'text', label: 'Product 1 image', upload: 'image' },
         { key: 'p2.tag', type: 'text', label: 'Product 2 tag', i18n: true },
         { key: 'p2.badge', type: 'text', label: 'Product 2 badge', i18n: true },
         { key: 'p2.name', type: 'text', label: 'Product 2 name', i18n: true },
@@ -345,7 +428,7 @@
         { key: 'p2.h2', type: 'text', label: 'Product 2 chip 2', i18n: true },
         { key: 'p2.h3', type: 'text', label: 'Product 2 chip 3', i18n: true },
         { key: 'p2.ing', type: 'textarea', label: 'Product 2 ingredients', i18n: true },
-        { key: 'product2', group: 'media', type: 'text', label: 'Product 2 image' },
+        { key: 'product2', group: 'media', type: 'text', label: 'Product 2 image', upload: 'image' },
         { key: 'p3.tag', type: 'text', label: 'Product 3 tag', i18n: true },
         { key: 'p3.badge', type: 'text', label: 'Product 3 badge', i18n: true },
         { key: 'p3.name', type: 'text', label: 'Product 3 name', i18n: true },
@@ -354,7 +437,7 @@
         { key: 'p3.h2', type: 'text', label: 'Product 3 chip 2', i18n: true },
         { key: 'p3.h3', type: 'text', label: 'Product 3 chip 3', i18n: true },
         { key: 'p3.ing', type: 'textarea', label: 'Product 3 ingredients', i18n: true },
-        { key: 'product3', group: 'media', type: 'text', label: 'Product 3 image' },
+        { key: 'product3', group: 'media', type: 'text', label: 'Product 3 image', upload: 'image' },
         { key: 'p4.tag', type: 'text', label: 'Product 4 tag', i18n: true },
         { key: 'p4.badge', type: 'text', label: 'Product 4 badge', i18n: true },
         { key: 'p4.name', type: 'text', label: 'Product 4 name', i18n: true },
@@ -363,7 +446,7 @@
         { key: 'p4.h2', type: 'text', label: 'Product 4 chip 2', i18n: true },
         { key: 'p4.h3', type: 'text', label: 'Product 4 chip 3', i18n: true },
         { key: 'p4.ing', type: 'textarea', label: 'Product 4 ingredients', i18n: true },
-        { key: 'product4', group: 'media', type: 'text', label: 'Product 4 image' }
+        { key: 'product4', group: 'media', type: 'text', label: 'Product 4 image', upload: 'image' }
       ]
     },
     reviews: {
@@ -379,9 +462,9 @@
         { key: 'reviews.q2', type: 'textarea', label: 'Review 2 quote', i18n: true },
         { key: 'reviews.q3', type: 'textarea', label: 'Review 3 quote', i18n: true },
         { key: 'reviews.tap', type: 'text', label: 'Tap hint', i18n: true },
-        { key: 'review1', group: 'media', type: 'text', label: 'Review 1 screenshot' },
-        { key: 'review2', group: 'media', type: 'text', label: 'Review 2 screenshot' },
-        { key: 'review3', group: 'media', type: 'text', label: 'Review 3 screenshot' }
+        { key: 'review1', group: 'media', type: 'text', label: 'Review 1 screenshot', upload: 'image' },
+        { key: 'review2', group: 'media', type: 'text', label: 'Review 2 screenshot', upload: 'image' },
+        { key: 'review3', group: 'media', type: 'text', label: 'Review 3 screenshot', upload: 'image' }
       ]
     },
     video: {
@@ -398,8 +481,8 @@
         { key: 'video.s2_desc', type: 'textarea', label: 'Stat 2 description', i18n: true },
         { key: 'video.s3_label', type: 'text', label: 'Stat 3 label', i18n: true },
         { key: 'video.s3_desc', type: 'textarea', label: 'Stat 3 description', i18n: true },
-        { key: 'videoSrc', group: 'media', type: 'text', label: 'Video file path / URL' },
-        { key: 'videoPoster', group: 'media', type: 'text', label: 'Video poster image' }
+        { key: 'videoSrc', group: 'media', type: 'text', label: 'Video file', upload: 'video' },
+        { key: 'videoPoster', group: 'media', type: 'text', label: 'Video poster image', upload: 'image' }
       ]
     },
     instagram: {
@@ -409,10 +492,10 @@
         { key: 'ig.eyebrow', type: 'text', label: 'Eyebrow', i18n: true },
         { key: 'ig.title', type: 'text', label: 'Title', i18n: true },
         { key: 'ig.intro', type: 'textarea', label: 'Intro (HTML allowed)', i18n: true, html: true },
-        { key: 'insta1', group: 'media', type: 'text', label: 'Grid image 1' },
-        { key: 'insta2', group: 'media', type: 'text', label: 'Grid image 2' },
-        { key: 'insta3', group: 'media', type: 'text', label: 'Grid image 3' },
-        { key: 'insta4', group: 'media', type: 'text', label: 'Grid image 4' }
+        { key: 'insta1', group: 'media', type: 'text', label: 'Grid image 1', upload: 'image' },
+        { key: 'insta2', group: 'media', type: 'text', label: 'Grid image 2', upload: 'image' },
+        { key: 'insta3', group: 'media', type: 'text', label: 'Grid image 3', upload: 'image' },
+        { key: 'insta4', group: 'media', type: 'text', label: 'Grid image 4', upload: 'image' }
       ]
     },
     nav: {
@@ -496,7 +579,15 @@
       ...content,
       updatedAt: new Date().toISOString()
     };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+    } catch (err) {
+      const quota = err && (err.name === 'QuotaExceededError' || err.code === 22);
+      if (quota) {
+        throw new Error('Storage is full. Use smaller images, remove some uploads, or Export then Reset unused media.');
+      }
+      throw err;
+    }
     return next;
   }
 
@@ -727,6 +818,8 @@
     save,
     reset,
     getFontOptions,
+    fileToMediaValue,
+    isDataMedia,
     getTextOverrides,
     getMergedDict,
     isAuthenticated,

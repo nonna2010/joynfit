@@ -403,12 +403,35 @@ code {
 }
 
 .media-preview {
-  width: 120px;
-  height: 90px;
+  width: 160px;
+  height: 120px;
   object-fit: cover;
   border-radius: 12px;
   border: 1px solid var(--line);
   background: #fff;
+}
+
+.media-preview[src^="data:video"],
+video.media-preview {
+  width: min(320px, 100%);
+  height: auto;
+  min-height: 120px;
+  background: #1a1a1a;
+}
+
+.media-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.45rem;
+}
+
+.media-upload-btn {
+  min-width: 160px;
+}
+
+.media-status {
+  margin-bottom: 0.35rem;
 }
 
 .toggle-grid {

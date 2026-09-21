@@ -187,6 +187,10 @@
       return wrap;
     }
 
+    if (field.group === 'media') {
+      return createMediaFieldEl(field, wrap);
+    }
+
     let input;
     if (field.type === 'textarea') {
       input = document.createElement('textarea');
@@ -209,9 +213,7 @@
     }
     input.className = 'field-input';
 
-    if (field.group === 'media') {
-      input.value = content.media?.[field.key] || '';
-    } else if (field.group === 'links') {
+    if (field.group === 'links') {
       input.value = content.links?.[field.key] || '';
     } else if (field.group === 'fonts') {
       input.value = content.fonts?.[field.key] || CMS.DEFAULT_FONTS[field.key];
@@ -247,22 +249,125 @@
     input.addEventListener('change', onChange);
 
     wrap.appendChild(input);
+    return wrap;
+  }
 
-    if (field.group === 'media' && /\.(jpe?g|png|webp|gif|svg|mp4)(\?|$)/i.test(input.value)) {
-      if (!/\.mp4(\?|$)/i.test(input.value)) {
-        const preview = document.createElement('img');
-        preview.className = 'media-preview';
-        preview.alt = '';
-        preview.src = input.value;
-        preview.onerror = () => { preview.hidden = true; };
-        wrap.appendChild(preview);
-        input.addEventListener('input', () => {
-          preview.hidden = false;
-          preview.src = input.value;
-        });
-      }
+  function createMediaFieldEl(field, wrap) {
+    const uploadKind = field.upload || (field.key === 'videoSrc' ? 'video' : 'image');
+    const currentValue = content.media?.[field.key] || '';
+    const defaultValue = CMS.createDefaultContent().media[field.key] || '';
+
+    const status = document.createElement('p');
+    status.className = 'field-hint media-status';
+    status.textContent = CMS.isDataMedia(currentValue)
+      ? 'Using uploaded file from your device'
+      : 'Using path / URL (or upload from your device)';
+
+    const actions = document.createElement('div');
+    actions.className = 'media-actions';
+
+    const uploadBtn = document.createElement('button');
+    uploadBtn.type = 'button';
+    uploadBtn.className = 'btn btn-primary media-upload-btn';
+    uploadBtn.textContent = uploadKind === 'video' ? 'Upload video' : 'Upload from device';
+
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.hidden = true;
+    fileInput.accept = uploadKind === 'video'
+      ? 'video/mp4,video/webm,video/*'
+      : 'image/jpeg,image/png,image/webp,image/gif,image/svg+xml,.jpg,.jpeg,.png,.webp,.gif,.svg';
+
+    const clearBtn = document.createElement('button');
+    clearBtn.type = 'button';
+    clearBtn.className = 'btn btn-ghost';
+    clearBtn.textContent = 'Use default';
+    clearBtn.disabled = !currentValue || currentValue === defaultValue;
+
+    const pathInput = document.createElement('input');
+    pathInput.type = 'text';
+    pathInput.className = 'field-input';
+    pathInput.placeholder = uploadKind === 'video'
+      ? 'Or paste a video URL / path'
+      : 'Or paste an image URL / path';
+    pathInput.value = CMS.isDataMedia(currentValue) ? '' : currentValue;
+
+    const preview = document.createElement(uploadKind === 'video' ? 'video' : 'img');
+    preview.className = 'media-preview';
+    if (uploadKind === 'video') {
+      preview.controls = true;
+      preview.muted = true;
+      preview.playsInline = true;
+    } else {
+      preview.alt = '';
     }
 
+    const updatePreview = (value) => {
+      const src = value || defaultValue;
+      const showPreview = !!src && (CMS.isDataMedia(src) || !/\.mp4(\?|$)/i.test(src) || uploadKind === 'video');
+      if (!showPreview) {
+        preview.hidden = true;
+        return;
+      }
+      preview.hidden = false;
+      if (uploadKind === 'video') {
+        preview.src = src;
+      } else if (/\.mp4(\?|$)/i.test(src) && !CMS.isDataMedia(src)) {
+        preview.hidden = true;
+      } else {
+        preview.src = src;
+        preview.onerror = () => { preview.hidden = true; };
+      }
+    };
+
+    updatePreview(currentValue);
+
+    const applyMediaValue = (value) => {
+      setFieldValue(field, value);
+      pathInput.value = CMS.isDataMedia(value) ? '' : value;
+      clearBtn.disabled = !value || value === defaultValue;
+      status.textContent = CMS.isDataMedia(value)
+        ? 'Using uploaded file from your device'
+        : 'Using path / URL (or upload from your device)';
+      updatePreview(value);
+    };
+
+    uploadBtn.addEventListener('click', () => fileInput.click());
+
+    fileInput.addEventListener('change', async () => {
+      const file = fileInput.files?.[0];
+      fileInput.value = '';
+      if (!file) return;
+      uploadBtn.disabled = true;
+      uploadBtn.textContent = 'Uploading…';
+      try {
+        const dataUrl = await CMS.fileToMediaValue(file, uploadKind);
+        applyMediaValue(dataUrl);
+        showToast(uploadKind === 'video' ? 'Video uploaded' : 'Image uploaded');
+      } catch (err) {
+        showToast(err.message || 'Upload failed', 'err');
+      } finally {
+        uploadBtn.disabled = false;
+        uploadBtn.textContent = uploadKind === 'video' ? 'Upload video' : 'Upload from device';
+      }
+    });
+
+    clearBtn.addEventListener('click', () => {
+      applyMediaValue(defaultValue);
+      showToast('Restored default media');
+    });
+
+    pathInput.addEventListener('input', () => {
+      applyMediaValue(pathInput.value.trim());
+    });
+
+    actions.appendChild(uploadBtn);
+    actions.appendChild(clearBtn);
+    wrap.appendChild(status);
+    wrap.appendChild(actions);
+    wrap.appendChild(fileInput);
+    wrap.appendChild(pathInput);
+    wrap.appendChild(preview);
     return wrap;
   }
 
@@ -380,10 +485,14 @@
   }
 
   function saveContent() {
-    content = CMS.save(content);
-    setDirty(false);
-    updateMeta();
-    showToast('Changes saved. Refresh the website to see them.');
+    try {
+      content = CMS.save(content);
+      setDirty(false);
+      updateMeta();
+      showToast('Changes saved. Refresh the website to see them.');
+    } catch (err) {
+      showToast(err.message || 'Save failed', 'err');
+    }
   }
 
   // Events

@@ -23,4 +23,4 @@ Control any website section from the content admin:
 - Edit texts (EN / AR), images, Instagram URL, video, fonts, text colors, and section visibility
 - Click **Save changes**, then refresh the public site
 
-Changes are stored in this browser’s `localStorage`. Use **Export** / **Import** to back up or move content between devices.
+Changes are stored in this browser’s `localStorage`. Use **Export** / **Import** to back up or move content between devices. Images uploaded from your device are compressed and saved with your CMS content.
