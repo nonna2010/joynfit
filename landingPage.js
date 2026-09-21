@@ -43,8 +43,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 2. Scroll Reveal Animations (IntersectionObserver)
+  // 2. Scroll Reveal Animations (IntersectionObserver) + staggered delays
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
+
+  const staggerGroups = [
+    document.querySelectorAll('.pillars-grid .reveal-on-scroll'),
+    document.querySelectorAll('.products-grid .reveal-on-scroll'),
+    document.querySelectorAll('.reviews-grid .reveal-on-scroll')
+  ];
+
+  staggerGroups.forEach((group) => {
+    group.forEach((el, index) => {
+      el.style.setProperty('--reveal-delay', `${index * 110}ms`);
+      if (index % 2 === 1) el.classList.add('reveal-scale');
+    });
+  });
+
+  const heroContent = document.querySelector('.hero-content');
+  const heroVisual = document.querySelector('.hero-visual');
+  if (heroContent) heroContent.classList.add('reveal-from-left');
+  if (heroVisual) heroVisual.classList.add('reveal-from-right');
+
   const revealObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -59,6 +78,60 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   revealElements.forEach(el => revealObserver.observe(el));
+
+  // Header blur on scroll
+  const siteHeader = document.getElementById('header');
+  const updateHeaderScroll = () => {
+    if (!siteHeader) return;
+    siteHeader.classList.toggle('is-scrolled', window.scrollY > 18);
+  };
+  updateHeaderScroll();
+  window.addEventListener('scroll', updateHeaderScroll, { passive: true });
+
+  // Stat count-up when video section enters view
+  const animateCount = (el, target, suffix, duration = 1100) => {
+    const start = performance.now();
+    const from = 0;
+    const tick = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = from + (target - from) * eased;
+      if (suffix === '%') {
+        el.textContent = `${Math.round(value)}%`;
+      } else if (suffix === '/5') {
+        el.textContent = `${value.toFixed(1)}/5`;
+      } else {
+        el.textContent = `${Math.round(value)}`;
+      }
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        el.classList.add('is-counted');
+      }
+    };
+    requestAnimationFrame(tick);
+  };
+
+  const stats = document.querySelectorAll('.stat-number');
+  if (stats.length) {
+    const statsObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const raw = el.textContent.trim();
+        if (raw.includes('%')) {
+          animateCount(el, parseFloat(raw), '%');
+        } else if (raw.includes('/')) {
+          animateCount(el, parseFloat(raw), '/5');
+        } else {
+          animateCount(el, parseFloat(raw) || 0, '');
+        }
+        observer.unobserve(el);
+      });
+    }, { threshold: 0.4 });
+
+    stats.forEach((stat) => statsObserver.observe(stat));
+  }
 
   // 3. Active Navigation Link Highlighting on Scroll
   const sections = document.querySelectorAll('section[id], header[id]');
