@@ -1,8 +1,12 @@
 /**
- * JoynFit — interactions for the redesigned landing page
+ * JoynFit Healthy Desserts — Interactive JavaScript
+ * Clean, lightweight vanilla interactions without embedded HTML or inline CSS.
+ * Mobile-optimized with touch events and responsive drawer behavior.
+ * 100% pure SVG icons, zero emojis.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // SVG Icon Templates for Dynamic Controls
   const ICONS = {
     play: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>',
     pause: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>',
@@ -10,14 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     volumeMute: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>'
   };
 
-  const header = document.getElementById('header');
-  const updateHeader = () => {
-    if (!header) return;
-    header.classList.toggle('is-scrolled', window.scrollY > 24);
-  };
-  updateHeader();
-  window.addEventListener('scroll', updateHeader, { passive: true });
-
+  // 1. Mobile Menu Drawer Toggle & Outside Tap to Close
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
   const mobileLinks = document.querySelectorAll('.mobile-nav-link, .mobile-cta');
@@ -27,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const isOpen = typeof forceState === 'boolean' ? forceState : !mobileMenu.classList.contains('open');
       mobileMenu.classList.toggle('open', isOpen);
       mobileMenuBtn.classList.toggle('is-active', isOpen);
-      mobileMenuBtn.setAttribute('aria-expanded', String(isOpen));
+      mobileMenuBtn.setAttribute('aria-expanded', isOpen);
     };
 
     mobileMenuBtn.addEventListener('click', (e) => {
@@ -35,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
       toggleMobileMenu();
     });
 
-    mobileLinks.forEach((link) => {
+    mobileLinks.forEach(link => {
       link.addEventListener('click', () => toggleMobileMenu(false));
     });
 
@@ -46,9 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // 2. Scroll Reveal Animations (IntersectionObserver)
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
   const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('is-visible');
         observer.unobserve(entry.target);
@@ -60,16 +58,17 @@ document.addEventListener('DOMContentLoaded', () => {
     rootMargin: '0px 0px -40px 0px'
   });
 
-  revealElements.forEach((el) => revealObserver.observe(el));
+  revealElements.forEach(el => revealObserver.observe(el));
 
-  const sections = document.querySelectorAll('section[id]');
+  // 3. Active Navigation Link Highlighting on Scroll
+  const sections = document.querySelectorAll('section[id], header[id]');
   const navLinks = document.querySelectorAll('.nav-links a');
 
   window.addEventListener('scroll', () => {
     let current = '';
     const scrollPos = window.scrollY + 120;
 
-    sections.forEach((section) => {
+    sections.forEach(section => {
       const sectionTop = section.offsetTop;
       const sectionHeight = section.offsetHeight;
       if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
@@ -77,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    navLinks.forEach((link) => {
+    navLinks.forEach(link => {
       link.classList.remove('active');
       if (link.getAttribute('href') === `#${current}`) {
         link.classList.add('active');
@@ -85,7 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { passive: true });
 
+  // 4. Product Category Filtering (removed — all products shown)
   const productCards = document.querySelectorAll('.product-card');
+
+  // 5. Product Quick View Modal (Reads from HTML, sets textContent on HTML modal)
   const productModal = document.getElementById('productModal');
   const closeProductModalBtn = document.getElementById('closeProductModalBtn');
   const modalImg = document.getElementById('modalProductImg');
@@ -96,11 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalProtein = document.getElementById('modalProductProtein');
   const modalFiber = document.getElementById('modalProductFiber');
   const modalIngredients = document.getElementById('modalProductIngredients');
-  const modalProductCta = document.getElementById('modalProductCta');
 
   const openProductModal = (card) => {
-    if (!card || !productModal) return;
+    if (!card) return;
 
+    // Extract details directly from card HTML
     const img = card.querySelector('.product-img')?.getAttribute('src') || '';
     const alt = card.querySelector('.product-img')?.getAttribute('alt') || '';
     const category = card.querySelector('.product-category')?.textContent || '';
@@ -111,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fiber = card.querySelector('.extra-fiber')?.textContent || 'High';
     const ingredients = card.querySelector('.extra-ingredients')?.textContent || 'All natural ingredients.';
 
+    // Populate pre-built HTML modal elements
     if (modalImg) {
       modalImg.src = img;
       modalImg.alt = alt;
@@ -124,27 +127,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modalIngredients) modalIngredients.textContent = ingredients;
 
     productModal.classList.add('is-open');
-    productModal.setAttribute('aria-hidden', 'false');
   };
 
-  const closeProductModal = () => {
-    productModal?.classList.remove('is-open');
-    productModal?.setAttribute('aria-hidden', 'true');
-  };
-
-  productCards.forEach((card) => {
+  // Support clicking the entire product card or the Quick View button (touch friendly)
+  productCards.forEach(card => {
     card.addEventListener('click', () => openProductModal(card));
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openProductModal(card);
-      }
-    });
   });
 
-  closeProductModalBtn?.addEventListener('click', closeProductModal);
-  modalProductCta?.addEventListener('click', closeProductModal);
+  if (closeProductModalBtn) {
+    closeProductModalBtn.addEventListener('click', () => {
+      productModal.classList.remove('is-open');
+    });
+  }
 
+  // 6. WhatsApp Reviews Lightbox Modal (Reads from HTML elements)
   const reviewModal = document.getElementById('reviewLightboxModal');
   const closeReviewModalBtn = document.getElementById('closeReviewModalBtn');
   const lightboxImg = document.getElementById('lightboxReviewImg');
@@ -152,44 +148,45 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightboxQuote = document.getElementById('lightboxReviewQuote');
   const reviewCards = document.querySelectorAll('.review-card');
 
-  const closeReviewModal = () => {
-    reviewModal?.classList.remove('is-open');
-    reviewModal?.setAttribute('aria-hidden', 'true');
-  };
-
-  reviewCards.forEach((card) => {
+  reviewCards.forEach(card => {
     card.addEventListener('click', () => {
       const imgSrc = card.getAttribute('data-review-img') || '';
       const userName = card.querySelector('.user-name')?.textContent || 'Customer Review';
-      const quote = card.querySelector('.wa-message-text')?.textContent || '';
 
       if (lightboxImg) lightboxImg.src = imgSrc;
-      if (lightboxName) lightboxName.textContent = `${userName} — Verified feedback`;
-      if (lightboxQuote) lightboxQuote.textContent = quote.trim();
+      if (lightboxName) lightboxName.textContent = `${userName} — WhatsApp Verified Feedback`;
+      if (lightboxQuote) lightboxQuote.textContent = '';
 
-      reviewModal?.classList.add('is-open');
-      reviewModal?.setAttribute('aria-hidden', 'false');
+      reviewModal.classList.add('is-open');
     });
   });
 
-  closeReviewModalBtn?.addEventListener('click', closeReviewModal);
-
-  [productModal, reviewModal].forEach((modal) => {
-    modal?.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
-      }
+  if (closeReviewModalBtn) {
+    closeReviewModalBtn.addEventListener('click', () => {
+      reviewModal.classList.remove('is-open');
     });
-  });
+  }
 
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeProductModal();
-      closeReviewModal();
+  // Close modals on clicking backdrop
+  [productModal, reviewModal].forEach(modal => {
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('is-open');
+        }
+      });
     }
   });
 
+  // Close modals on Escape key
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      productModal?.classList.remove('is-open');
+      reviewModal?.classList.remove('is-open');
+    }
+  });
+
+  // 7. Video Player Controls
   const video = document.getElementById('reviewVideo');
   const playBtn = document.getElementById('playVideoBtn');
   const miniPlayBtn = document.getElementById('miniPlayBtn');
@@ -202,39 +199,44 @@ document.addEventListener('DOMContentLoaded', () => {
     const togglePlay = () => {
       if (video.paused || video.ended) {
         video.play().then(() => {
-          videoOverlay?.classList.add('hidden');
+          videoOverlay.classList.add('hidden');
           if (miniPlayBtn) miniPlayBtn.innerHTML = ICONS.pause;
         }).catch(() => {
           alert('Please place your customer review video in assets/video/joynfit-video.mp4');
         });
       } else {
         video.pause();
-        videoOverlay?.classList.remove('hidden');
+        videoOverlay.classList.remove('hidden');
         if (miniPlayBtn) miniPlayBtn.innerHTML = ICONS.play;
       }
     };
 
     playBtn.addEventListener('click', togglePlay);
-    miniPlayBtn?.addEventListener('click', togglePlay);
+    if (miniPlayBtn) miniPlayBtn.addEventListener('click', togglePlay);
     video.addEventListener('click', togglePlay);
 
     video.addEventListener('timeupdate', () => {
       if (video.duration && progressFill) {
-        progressFill.style.width = `${(video.currentTime / video.duration) * 100}%`;
+        const percent = (video.currentTime / video.duration) * 100;
+        progressFill.style.width = `${percent}%`;
       }
     });
 
-    muteBtn?.addEventListener('click', () => {
-      video.muted = !video.muted;
-      muteBtn.innerHTML = video.muted ? ICONS.volumeMute : ICONS.volumeHigh;
-    });
+    if (muteBtn) {
+      muteBtn.addEventListener('click', () => {
+        video.muted = !video.muted;
+        muteBtn.innerHTML = video.muted ? ICONS.volumeMute : ICONS.volumeHigh;
+      });
+    }
 
-    fullscreenBtn?.addEventListener('click', () => {
-      if (video.requestFullscreen) {
-        video.requestFullscreen();
-      } else if (video.webkitRequestFullscreen) {
-        video.webkitRequestFullscreen();
-      }
-    });
+    if (fullscreenBtn) {
+      fullscreenBtn.addEventListener('click', () => {
+        if (video.requestFullscreen) {
+          video.requestFullscreen();
+        } else if (video.webkitRequestFullscreen) {
+          video.webkitRequestFullscreen();
+        }
+      });
+    }
   }
 });
