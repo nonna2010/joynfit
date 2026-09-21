@@ -47,84 +47,69 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 2. Professional section + scroll reveal animations
+  // 2. One-by-one section part reveals
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const STEP_MS = prefersReducedMotion ? 0 : 340;
 
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
   const animateSections = document.querySelectorAll('.animate-section');
 
-  const staggerGroups = [
-    document.querySelectorAll('.pillars-grid .reveal-on-scroll'),
-    document.querySelectorAll('.products-grid .reveal-on-scroll'),
-    document.querySelectorAll('.reviews-grid .reveal-on-scroll')
-  ];
+  const showOneByOne = (elements, step = STEP_MS, startDelay = 0) => {
+    const list = Array.from(elements).filter(Boolean);
+    list.forEach((el, index) => {
+      el.style.setProperty('--reveal-delay', '0ms');
+      window.setTimeout(() => {
+        el.classList.add('is-visible');
+      }, startDelay + index * step);
+    });
+  };
 
-  staggerGroups.forEach((group) => {
-    group.forEach((el, index) => {
-      el.style.setProperty('--reveal-delay', `${120 + index * 130}ms`);
+  const getSectionParts = (section) => {
+    // Strict DOM order: each .seq-item appears one after another
+    return Array.from(section.querySelectorAll('.seq-item'));
+  };
+
+  // Prepare motion variants for cards
+  document.querySelectorAll('.pillars-grid .seq-item, .products-grid .seq-item, .reviews-grid .seq-item')
+    .forEach((el, index) => {
       if (index % 2 === 1) el.classList.add('reveal-scale');
-      else if (index % 3 === 0) el.classList.add('reveal-from-left');
-      else el.classList.add('reveal-from-right');
+      else el.classList.add(index % 3 === 0 ? 'reveal-from-left' : 'reveal-from-right');
     });
-  });
 
-  const heroContent = document.querySelector('.hero-content');
-  const heroVisual = document.querySelector('.hero-visual');
-  if (heroContent) heroContent.classList.add('reveal-from-left');
-  if (heroVisual) heroVisual.classList.add('reveal-from-right');
+  const playSectionSequence = (section) => {
+    if (!section || section.dataset.seqPlayed === '1') return;
+    section.dataset.seqPlayed = '1';
+    section.classList.add('is-inview');
+    showOneByOne(getSectionParts(section), STEP_MS, section.id === 'hero' ? 150 : 100);
+  };
 
-  const revealObserver = new IntersectionObserver((entries, observer) => {
+  const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
-      entry.target.classList.add('is-visible');
-      observer.unobserve(entry.target);
+      playSectionSequence(entry.target);
+      sectionObserver.unobserve(entry.target);
     });
   }, {
     root: null,
-    threshold: 0.14,
-    rootMargin: '0px 0px -8% 0px'
+    threshold: 0.12,
+    rootMargin: '0px 0px -12% 0px'
   });
 
-  revealElements.forEach((el) => revealObserver.observe(el));
+  animateSections.forEach((section) => sectionObserver.observe(section));
 
-  const sectionObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('is-inview');
-      // Cascade nested reveals slightly after section enters
-      entry.target.querySelectorAll('.reveal-on-scroll:not(.is-visible)').forEach((child, i) => {
-        window.setTimeout(() => child.classList.add('is-visible'), prefersReducedMotion ? 0 : 60 + i * 80);
-      });
-      observer.unobserve(entry.target);
-    });
-  }, {
-    root: null,
-    threshold: 0.08,
-    rootMargin: '0px 0px -5% 0px'
-  });
-
-  animateSections.forEach((section) => {
-    if (section.id === 'hero') {
-      section.classList.add('is-inview');
-      section.querySelectorAll('.reveal-on-scroll').forEach((el) => el.classList.add('is-visible'));
-      return;
-    }
-    sectionObserver.observe(section);
-  });
-
-  // Failsafe: if a section is already on screen, reveal immediately
+  // If already visible on load, start their sequences
   window.requestAnimationFrame(() => {
     animateSections.forEach((section) => {
       const rect = section.getBoundingClientRect();
-      if (rect.top < window.innerHeight * 0.85 && rect.bottom > 80) {
-        section.classList.add('is-inview');
-        section.querySelectorAll('.reveal-on-scroll').forEach((el) => el.classList.add('is-visible'));
+      if (rect.top < window.innerHeight * 0.82 && rect.bottom > 60) {
+        playSectionSequence(section);
+        sectionObserver.unobserve(section);
       }
     });
   });
 
   if (prefersReducedMotion) {
-    revealElements.forEach((el) => el.classList.add('is-visible'));
+    document.querySelectorAll('.seq-item, .reveal-on-scroll').forEach((el) => el.classList.add('is-visible'));
     animateSections.forEach((el) => el.classList.add('is-inview'));
   }
 

@@ -1826,19 +1826,27 @@ h1, h2, h3, h4 {
    -------------------------------------------------------------------------- */
 .js-anim .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(56px);
-  filter: blur(4px);
+  transform: translateY(48px);
+  filter: blur(3px);
   transition:
-    opacity 1s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
-    transform 1s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
-    filter 1s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform, filter;
 }
 
-.reveal-on-scroll {
-  /* visible by default until JS enables animations */
+.js-anim .seq-item:not(.reveal-on-scroll) {
+  opacity: 0;
+  transform: translateY(36px);
+  filter: blur(2px);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
 }
 
+.js-anim .seq-item.is-visible,
 .js-anim .reveal-on-scroll.is-visible,
 .reveal-on-scroll.is-visible {
   opacity: 1;
@@ -1907,38 +1915,7 @@ html[dir="rtl"] .insta-content .sub-heading::after {
   width: 72px;
 }
 
-.animate-section .section-title,
-.animate-section .products-header .section-title {
-  transition:
-    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s,
-    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
-}
-
-.js-anim .animate-section:not(.is-inview) .section-title {
-  opacity: 0;
-  transform: translateY(28px);
-}
-
-.animate-section.is-inview .section-title {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.animate-section .section-intro {
-  transition:
-    opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.2s,
-    transform 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
-}
-
-.js-anim .animate-section:not(.is-inview) .section-intro {
-  opacity: 0;
-  transform: translateY(22px);
-}
-
-.animate-section.is-inview .section-intro {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* titles/intros animate via .seq-item one-by-one */
 
 .animate-section::before {
   content: "";
@@ -1995,33 +1972,6 @@ html[dir="rtl"] .insta-content .sub-heading::after {
 .site-footer.animate-section.is-inview .footer-content > *:nth-child(2) { --footer-delay: 100ms; }
 .site-footer.animate-section.is-inview .footer-content > *:nth-child(3) { --footer-delay: 180ms; }
 .site-footer.animate-section.is-inview .footer-content > *:nth-child(4) { --footer-delay: 260ms; }
-
-@keyframes heroContentIn {
-  from { opacity: 0; transform: translateY(40px); filter: blur(8px); }
-  to { opacity: 1; transform: translateY(0); filter: blur(0); }
-}
-
-@keyframes heroVisualIn {
-  from { opacity: 0; transform: translateY(28px) scale(0.94); filter: blur(8px); }
-  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-}
-
-.hero-content.reveal-on-scroll {
-  animation: heroContentIn 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
-  filter: none;
-}
-
-.hero-visual.reveal-on-scroll {
-  animation: heroVisualIn 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both;
-  filter: none;
-}
-
-.hero-content.reveal-on-scroll.is-visible,
-.hero-visual.reveal-on-scroll.is-visible {
-  opacity: 1;
-  transform: none;
-  filter: none;
-}
 
 .btn {
   position: relative;
@@ -2108,50 +2058,23 @@ html[dir="rtl"] .insta-content .sub-heading::after {
   box-shadow: 0 8px 24px rgba(69, 39, 11, 0.06);
 }
 
-.hero-pill-badges .pill-badge {
-  animation: pillIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+.hero-pill-badges.is-visible .pill-badge {
+  animation: pillIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.hero-pill-badges .pill-badge:nth-child(1) { animation-delay: 0.7s; }
-.hero-pill-badges .pill-badge:nth-child(2) { animation-delay: 0.85s; }
-.hero-pill-badges .pill-badge:nth-child(3) { animation-delay: 1s; }
+.hero-pill-badges.is-visible .pill-badge:nth-child(1) { animation-delay: 0.05s; }
+.hero-pill-badges.is-visible .pill-badge:nth-child(2) { animation-delay: 0.15s; }
+.hero-pill-badges.is-visible .pill-badge:nth-child(3) { animation-delay: 0.25s; }
 
 @keyframes pillIn {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.js-anim .video-section:not(.is-inview) .video-stat-item {
-  opacity: 0;
-  transform: translateY(18px);
-}
-
-.animate-section.is-inview .video-stat-item {
-  animation: fadeUpSoft 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.animate-section.is-inview .video-stat-item:nth-child(1) { animation-delay: 0.2s; }
-.animate-section.is-inview .video-stat-item:nth-child(2) { animation-delay: 0.35s; }
-.animate-section.is-inview .video-stat-item:nth-child(3) { animation-delay: 0.5s; }
-
 @keyframes fadeUpSoft {
   from { opacity: 0; transform: translateY(18px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
-.js-anim .insta-grid a {
-  opacity: 0;
-  transform: translateY(16px) scale(0.96);
-}
-
-.animate-section.is-inview .insta-grid a {
-  animation: fadeUpSoft 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.animate-section.is-inview .insta-grid a:nth-child(1) { animation-delay: 0.15s; }
-.animate-section.is-inview .insta-grid a:nth-child(2) { animation-delay: 0.25s; }
-.animate-section.is-inview .insta-grid a:nth-child(3) { animation-delay: 0.35s; }
-.animate-section.is-inview .insta-grid a:nth-child(4) { animation-delay: 0.45s; }
 
 @media (prefers-reduced-motion: reduce) {
   *,
