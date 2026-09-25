@@ -96,6 +96,15 @@
       content.colors[field.key] = value;
       CMS.applyColors(content);
       updateFontPreview();
+    } else if (field.group === 'meta' && field.key === 'password') {
+      const trimmed = String(value || '').trim();
+      if (trimmed) {
+        content.password = trimmed;
+      } else {
+        // Blank = keep the last saved password
+        const saved = CMS.load();
+        content.password = saved.password || CMS.DEFAULT_PASSWORD;
+      }
     } else if (field.i18n) {
       if (!content.texts[editLang]) content.texts[editLang] = {};
       const base = getBaseText(editLang, field.key);
@@ -217,6 +226,9 @@
       input.value = content.fonts?.[field.key] || CMS.DEFAULT_FONTS[field.key];
       const selected = CMS.FONT_CATALOG[input.value];
       if (selected) input.style.fontFamily = selected.family;
+    } else if (field.group === 'meta' && field.key === 'password') {
+      input.value = '';
+      input.placeholder = 'Enter new password';
     } else if (field.i18n) {
       input.value = getTextValue(editLang, field.key);
       const hint = document.createElement('p');

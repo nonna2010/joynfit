@@ -5,9 +5,9 @@
 (function () {
   const STORAGE_KEY = 'joynfit-cms';
   const AUTH_KEY = 'joynfit-cms-auth';
-  /** Fixed master admin password — not overridable via CMS / localStorage. */
-  const MASTER_PASSWORD = 'joynfitxxx';
-  const PASSWORD_MIGRATION_KEY = 'joynfit-cms-password-migrated';
+  /** Initial / fallback admin password. Changeable under Site Settings. */
+  const DEFAULT_PASSWORD = 'joynfitxxx';
+  const LEGACY_PASSWORDS = new Set(['joynfit']);
 
   const DEFAULT_MEDIA = {
     logo: 'assets/images/brand/joynfit_logo.png',
@@ -286,10 +286,17 @@
   const FIELD_SCHEMA = {
     settings: {
       label: 'Site Settings',
-      description: 'Global links and branding media.',
+      description: 'Global links, branding media, and admin access.',
       fields: [
         { key: 'instagram', group: 'links', type: 'url', label: 'Instagram URL' },
-        { key: 'logo', group: 'media', type: 'text', label: 'Logo image', upload: 'image' }
+        { key: 'logo', group: 'media', type: 'text', label: 'Logo image', upload: 'image' },
+        {
+          key: 'password',
+          group: 'meta',
+          type: 'password',
+          label: 'Change password',
+          hint: 'Updates the admin login password for this browser. Leave blank to keep the current password.'
+        }
       ]
     },
     fonts: {
@@ -540,7 +547,7 @@
     return {
       version: 1,
       updatedAt: null,
-      password: MASTER_PASSWORD,
+      password: DEFAULT_PASSWORD,
       sections: { ...DEFAULT_SECTIONS },
       media: { ...DEFAULT_MEDIA },
       links: { ...DEFAULT_LINKS },
@@ -564,38 +571,35 @@
     return out;
   }
 
-  /** Overwrite any legacy stored password and invalidate old admin sessions. */
-  function resetPasswordToMaster(content, previousPassword) {
-    const next = { ...content, password: MASTER_PASSWORD };
-    const needsReset = previousPassword !== undefined && previousPassword !== MASTER_PASSWORD;
-    try {
-      if (needsReset || localStorage.getItem(PASSWORD_MIGRATION_KEY) !== MASTER_PASSWORD) {
+  function normalizePassword(value) {
+    return typeof value === 'string' && value.trim() ? value.trim() : DEFAULT_PASSWORD;
+  }
+
+  /** One-time upgrade of the old shipped default (`joynfit`) to `joynfitxxx`. */
+  function migrateLegacyPassword(content) {
+    const next = { ...content };
+    if (LEGACY_PASSWORDS.has(next.password)) {
+      next.password = DEFAULT_PASSWORD;
+      try {
         sessionStorage.removeItem(AUTH_KEY);
-        localStorage.setItem(PASSWORD_MIGRATION_KEY, MASTER_PASSWORD);
         localStorage.setItem(
           STORAGE_KEY,
           JSON.stringify({ ...next, updatedAt: new Date().toISOString() })
         );
-      }
-    } catch (_) { /* ignore quota / private mode */ }
+      } catch (_) { /* ignore quota / private mode */ }
+    } else {
+      next.password = normalizePassword(next.password);
+    }
     return next;
   }
 
   function load() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) {
-        try {
-          localStorage.setItem(PASSWORD_MIGRATION_KEY, MASTER_PASSWORD);
-        } catch (_) { /* ignore */ }
-        return createDefaultContent();
-      }
+      if (!raw) return createDefaultContent();
       const parsed = JSON.parse(raw);
-      const previousPassword = Object.prototype.hasOwnProperty.call(parsed, 'password')
-        ? parsed.password
-        : undefined;
       const content = deepMerge(createDefaultContent(), parsed);
-      return resetPasswordToMaster(content, previousPassword);
+      return migrateLegacyPassword(content);
     } catch (_) {
       return createDefaultContent();
     }
@@ -604,12 +608,11 @@
   function save(content) {
     const next = {
       ...content,
-      password: MASTER_PASSWORD,
+      password: normalizePassword(content.password),
       updatedAt: new Date().toISOString()
     };
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-      localStorage.setItem(PASSWORD_MIGRATION_KEY, MASTER_PASSWORD);
     } catch (err) {
       const quota = err && (err.name === 'QuotaExceededError' || err.code === 22);
       if (quota) {
@@ -623,7 +626,6 @@
   function reset() {
     try {
       localStorage.removeItem(STORAGE_KEY);
-      localStorage.setItem(PASSWORD_MIGRATION_KEY, MASTER_PASSWORD);
       sessionStorage.removeItem(AUTH_KEY);
     } catch (_) { /* ignore */ }
     return createDefaultContent();
@@ -647,7 +649,8 @@
   }
 
   function login(password) {
-    if (password === MASTER_PASSWORD) {
+    const expected = normalizePassword(load().password);
+    if (password === expected) {
       sessionStorage.setItem(AUTH_KEY, '1');
       return true;
     }
@@ -839,7 +842,7 @@
 
   window.JoynFitCMS = {
     STORAGE_KEY,
-    MASTER_PASSWORD,
+    DEFAULT_PASSWORD,
     DEFAULT_FONTS,
     DEFAULT_COLORS,
     FONT_CATALOG,
