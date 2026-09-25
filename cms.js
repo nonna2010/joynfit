@@ -28,13 +28,15 @@
   };
 
   const DEFAULT_LINKS = {
-    instagram: 'https://www.instagram.com/joynfit.eg?stkn=MWc2dnRtcTJsa2xocQ=='
+    instagram: 'https://www.instagram.com/joynfit.eg?stkn=MWc2dnRtcTJsa2xocQ==',
+    whatsapp: '201036595467'
   };
 
   const DEFAULT_SECTIONS = {
     hero: true,
     about: true,
     products: true,
+    order: true,
     reviews: true,
     video: true,
     instagram: true,
@@ -289,6 +291,13 @@
       description: 'Global links, branding media, and admin access.',
       fields: [
         { key: 'instagram', group: 'links', type: 'url', label: 'Instagram URL' },
+        {
+          key: 'whatsapp',
+          group: 'links',
+          type: 'text',
+          label: 'WhatsApp order number',
+          hint: 'Digits only or with + country code. Orders open chat to this number.'
+        },
         { key: 'logo', group: 'media', type: 'text', label: 'Logo image', upload: 'image' },
         {
           key: 'password',
@@ -364,6 +373,7 @@
         { key: 'hero', label: 'Hero' },
         { key: 'about', label: 'Our Story' },
         { key: 'products', label: 'Creations / Products' },
+        { key: 'order', label: 'Order Now' },
         { key: 'reviews', label: 'Customer Reviews' },
         { key: 'video', label: 'Video Reviews' },
         { key: 'instagram', label: 'Instagram / Community' },
@@ -457,6 +467,26 @@
         { key: 'product4', group: 'media', type: 'text', label: 'Product 4 image', upload: 'image' }
       ]
     },
+    order: {
+      label: 'Order Now',
+      description: 'Order form copy sent to WhatsApp.',
+      fields: [
+        { key: 'order.eyebrow', type: 'text', label: 'Eyebrow', i18n: true },
+        { key: 'order.title', type: 'text', label: 'Title', i18n: true },
+        { key: 'order.intro', type: 'textarea', label: 'Intro', i18n: true },
+        { key: 'order.product', type: 'text', label: 'Product label', i18n: true },
+        { key: 'order.product_placeholder', type: 'text', label: 'Product placeholder', i18n: true },
+        { key: 'order.custom', type: 'text', label: 'Custom product option', i18n: true },
+        { key: 'order.name', type: 'text', label: 'Name label', i18n: true },
+        { key: 'order.mobile', type: 'text', label: 'Mobile label', i18n: true },
+        { key: 'order.location', type: 'text', label: 'Location label', i18n: true },
+        { key: 'order.notes', type: 'text', label: 'Notes label', i18n: true },
+        { key: 'order.notes_placeholder', type: 'text', label: 'Notes placeholder', i18n: true },
+        { key: 'order.submit', type: 'text', label: 'Submit button', i18n: true },
+        { key: 'order.hint', type: 'text', label: 'Form hint', i18n: true },
+        { key: 'order.error', type: 'text', label: 'Validation error', i18n: true }
+      ]
+    },
     reviews: {
       label: 'Customer Reviews',
       description: 'Review section copy and screenshot images.',
@@ -512,6 +542,7 @@
       fields: [
         { key: 'nav.story', type: 'text', label: 'Our Story', i18n: true },
         { key: 'nav.creations', type: 'text', label: 'Creations', i18n: true },
+        { key: 'nav.order', type: 'text', label: 'Order Now', i18n: true },
         { key: 'nav.love', type: 'text', label: 'Customer Love', i18n: true },
         { key: 'nav.watch', type: 'text', label: 'Watch Reviews', i18n: true },
         { key: 'nav.community', type: 'text', label: 'Community', i18n: true },
@@ -526,6 +557,7 @@
         { key: 'footer.bio', type: 'textarea', label: 'Brand bio', i18n: true },
         { key: 'footer.nav', type: 'text', label: 'Navigation heading', i18n: true },
         { key: 'footer.creations', type: 'text', label: 'Creations link', i18n: true },
+        { key: 'footer.order', type: 'text', label: 'Order Now link', i18n: true },
         { key: 'footer.reviews', type: 'text', label: 'Reviews link', i18n: true },
         { key: 'footer.video', type: 'text', label: 'Video link', i18n: true },
         { key: 'footer.connect', type: 'text', label: 'Connect heading', i18n: true },
@@ -750,10 +782,18 @@
 
   function applyLinks(content) {
     const ig = content.links?.instagram;
-    if (!ig) return;
-    document.querySelectorAll('[data-cms-link="instagram"]').forEach((el) => {
-      el.setAttribute('href', ig);
-    });
+    if (ig) {
+      document.querySelectorAll('[data-cms-link="instagram"]').forEach((el) => {
+        el.setAttribute('href', ig);
+      });
+    }
+
+    const wa = String(content.links?.whatsapp || '').replace(/\D/g, '');
+    if (wa) {
+      document.querySelectorAll('[data-cms-whatsapp]').forEach((el) => {
+        el.setAttribute('data-whatsapp', wa);
+      });
+    }
   }
 
   function ensureGoogleFonts(fonts) {

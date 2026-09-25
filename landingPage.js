@@ -204,6 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalProtein = document.getElementById('modalProductProtein');
   const modalFiber = document.getElementById('modalProductFiber');
   const modalIngredients = document.getElementById('modalProductIngredients');
+  const modalProductCta = document.getElementById('modalProductCta');
 
   const openProductModal = (card) => {
     if (!card) return;
@@ -232,17 +233,43 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modalFiber) modalFiber.textContent = fiber;
     if (modalIngredients) modalIngredients.textContent = ingredients;
 
+    if (modalProductCta) {
+      modalProductCta.dataset.productKey = card.dataset.productKey || '';
+      modalProductCta.dataset.productName = title;
+    }
+
     productModal.classList.add('is-open');
   };
 
   // Support clicking the entire product card or the Quick View button (touch friendly)
-  productCards.forEach(card => {
+  productCards.forEach((card, index) => {
+    card.dataset.productKey = `p${index + 1}`;
     card.addEventListener('click', () => openProductModal(card));
   });
 
   if (closeProductModalBtn) {
     closeProductModalBtn.addEventListener('click', () => {
       productModal.classList.remove('is-open');
+    });
+  }
+
+  const prefillOrderProduct = (productKey) => {
+    const productSelect = document.getElementById('orderProduct');
+    if (!productSelect || !productKey) return;
+    const option = Array.from(productSelect.options).find((opt) => opt.value === productKey);
+    if (option) productSelect.value = productKey;
+  };
+
+  if (modalProductCta) {
+    modalProductCta.addEventListener('click', (e) => {
+      e.preventDefault();
+      const key = modalProductCta.dataset.productKey || '';
+      productModal.classList.remove('is-open');
+      prefillOrderProduct(key);
+      const orderSection = document.getElementById('order');
+      if (orderSection) {
+        orderSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
   }
 
@@ -344,5 +371,77 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }
+  }
+
+  // 8. Order Now → WhatsApp
+  const orderForm = document.getElementById('orderForm');
+  const orderFormError = document.getElementById('orderFormError');
+
+  const getOrderLabel = (key, fallback) => {
+    const lang = document.documentElement.lang === 'ar' ? 'ar' : 'en';
+    const dict = window.JoynFitI18n?.translations?.[lang];
+    const merged = window.JoynFitCMS?.getMergedDict && dict
+      ? window.JoynFitCMS.getMergedDict(dict, lang)
+      : dict;
+    return (merged && merged[key]) || fallback;
+  };
+
+  const getWhatsAppNumber = () => {
+    const fromCms = window.JoynFitCMS?.load?.()?.links?.whatsapp;
+    const fromForm = orderForm?.getAttribute('data-whatsapp');
+    return String(fromCms || fromForm || '201036595467').replace(/\D/g, '');
+  };
+
+  const buildOrderMessage = ({ product, name, mobile, location, notes }) => {
+    const title = getOrderLabel('order.msg_title', 'New JoynFit Order');
+    const productLabel = getOrderLabel('order.msg_product', 'Product');
+    const nameLabel = getOrderLabel('order.msg_name', 'Name');
+    const mobileLabel = getOrderLabel('order.msg_mobile', 'Mobile');
+    const locationLabel = getOrderLabel('order.msg_location', 'Location');
+    const notesLabel = getOrderLabel('order.msg_notes', 'Notes');
+    const notesValue = notes || '-';
+
+    return [
+      title,
+      `${productLabel}: ${product}`,
+      `${nameLabel}: ${name}`,
+      `${mobileLabel}: ${mobile}`,
+      `${locationLabel}: ${location}`,
+      `${notesLabel}: ${notesValue}`
+    ].join('\n');
+  };
+
+  if (orderForm) {
+    orderForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const productSelect = document.getElementById('orderProduct');
+      const nameInput = document.getElementById('orderName');
+      const mobileInput = document.getElementById('orderMobile');
+      const locationInput = document.getElementById('orderLocation');
+      const notesInput = document.getElementById('orderNotes');
+
+      const productOption = productSelect?.selectedOptions?.[0];
+      const product = (productOption && productSelect.value)
+        ? productOption.textContent.trim()
+        : '';
+      const name = nameInput?.value.trim() || '';
+      const mobile = mobileInput?.value.trim() || '';
+      const location = locationInput?.value.trim() || '';
+      const notes = notesInput?.value.trim() || '';
+
+      const valid = product && name && mobile && location;
+      if (orderFormError) {
+        orderFormError.hidden = valid;
+      }
+      if (!valid) return;
+
+      const phone = getWhatsAppNumber();
+      if (!phone) return;
+
+      const message = buildOrderMessage({ product, name, mobile, location, notes });
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
   }
 });

@@ -10,6 +10,7 @@
       'page.description': 'Discover JoynFit: artisan healthy desserts made with wholesome ingredients, zero refined sugars, and exquisite taste. Fresh, clean, and guilt-free indulgence.',
       'nav.story': 'Our Story',
       'nav.creations': 'Creations',
+      'nav.order': 'Order Now',
       'nav.love': 'Customer Love',
       'nav.watch': 'Watch Reviews',
       'nav.community': 'Community',
@@ -77,8 +78,28 @@
       'p4.h3': 'Tropical Taste',
       'p4.ing': 'Toasted coconut flakes, coconut butter, organic oats, Medjool dates, vanilla extract, a pinch of sea salt.',
       'callout.title': 'Every batch is freshly made to order',
-      'callout.desc': 'We believe in absolute freshness. Connect with us on Instagram to see current batch availability and discover seasonal flavors.',
-      'callout.cta': 'Check Availability',
+      'callout.desc': 'We believe in absolute freshness. Fill in your order details and send them to us on WhatsApp in one tap.',
+      'callout.cta': 'Order Now',
+      'order.eyebrow': 'Order Now',
+      'order.title': 'Place your order in a minute.',
+      'order.intro': 'Choose a creation, share your details, and we will open WhatsApp with your order ready to send.',
+      'order.product': 'Product',
+      'order.product_placeholder': 'Select a product',
+      'order.custom': 'Custom / Other request',
+      'order.name': 'Full name',
+      'order.mobile': 'Mobile number',
+      'order.location': 'Location / Delivery area',
+      'order.notes': 'Notes',
+      'order.notes_placeholder': 'Quantity, preferred time, or special requests',
+      'order.submit': 'Send Order on WhatsApp',
+      'order.hint': 'Your details open in WhatsApp so you can confirm and send the order.',
+      'order.error': 'Please fill in product, name, mobile, and location.',
+      'order.msg_title': 'New JoynFit Order',
+      'order.msg_product': 'Product',
+      'order.msg_name': 'Name',
+      'order.msg_mobile': 'Mobile',
+      'order.msg_location': 'Location',
+      'order.msg_notes': 'Notes',
       'reviews.eyebrow': 'Real Community Love',
       'reviews.title': 'Words from our happy eaters.',
       'reviews.intro': 'Authentic customer messages straight from our WhatsApp community. Click on any review to view the full message screenshot.',
@@ -104,6 +125,7 @@
       'footer.bio': 'Artisanal healthy dessert brand created with care. Enjoy uncompromised sweet indulgence crafted from natural, clean, and nutritious ingredients.',
       'footer.nav': 'Navigation',
       'footer.creations': 'Dessert Creations',
+      'footer.order': 'Order Now',
       'footer.reviews': 'Customer Reviews',
       'footer.video': 'Video Testimonials',
       'footer.connect': 'Connect',
@@ -121,13 +143,14 @@
       'modal.protein': 'Clean Protein',
       'modal.fiber': 'Dietary Fiber',
       'modal.ingredients': 'Wholesome Ingredients',
-      'modal.cta': 'Inquire / Request Batch on Instagram'
+      'modal.cta': 'Order this creation'
     },
     ar: {
       'page.title': 'جوين فت — حلويات صحية مصنوعة بفرحة خالصة',
       'page.description': 'اكتشف جوين فت: حلويات حرفية صحية بمكونات طبيعية، خالية من السكر المكرر، بطعم رائع. انتعاش ونظافة واستمتاع بلا شعور بالذنب.',
       'nav.story': 'قصتنا',
       'nav.creations': 'إبداعاتنا',
+      'nav.order': 'اطلب الآن',
       'nav.love': 'حب العملاء',
       'nav.watch': 'شاهد التقييمات',
       'nav.community': 'المجتمع',
@@ -195,8 +218,28 @@
       'p4.h3': 'طعم استوائي',
       'p4.ing': 'رقائق جوز هند محمصة، زبدة جوز هند، شوفان عضوي، تمر مجهول، مستخلص فانيليا، رشة ملح بحر.',
       'callout.title': 'كل دفعة تُصنع طازجة حسب الطلب',
-      'callout.desc': 'نؤمن بالطزاجة المطلقة. تواصل معنا على إنستغرام لمعرفة توفر الدفعات الحالية واكتشاف النكهات الموسمية.',
-      'callout.cta': 'تحقق من التوفر',
+      'callout.desc': 'نؤمن بالطزاجة المطلقة. املأ بيانات طلبك وأرسلها لنا على واتساب بضغطة واحدة',
+      'callout.cta': 'اطلب الآن',
+      'order.eyebrow': 'اطلب الآن',
+      'order.title': 'قدّم طلبك في دقيقة.',
+      'order.intro': 'اختر المنتج، أدخل بياناتك، وسنفتح واتساب برسالة الطلب جاهزة للإرسال.',
+      'order.product': 'المنتج',
+      'order.product_placeholder': 'اختر منتجًا',
+      'order.custom': 'طلب مخصص / آخر',
+      'order.name': 'الاسم بالكامل',
+      'order.mobile': 'رقم الموبايل',
+      'order.location': 'الموقع / منطقة التوصيل',
+      'order.notes': 'ملاحظات',
+      'order.notes_placeholder': 'الكمية أو الوقت المفضل أو أي طلب خاص',
+      'order.submit': 'إرسال الطلب عبر واتساب',
+      'order.hint': 'تُفتح بياناتك في واتساب لتأكيد الطلب وإرساله.',
+      'order.error': 'يرجى إدخال المنتج والاسم والموبايل والموقع.',
+      'order.msg_title': 'طلب جديد من جوين فت',
+      'order.msg_product': 'المنتج',
+      'order.msg_name': 'الاسم',
+      'order.msg_mobile': 'الموبايل',
+      'order.msg_location': 'الموقع',
+      'order.msg_notes': 'ملاحظات',
       'reviews.eyebrow': 'حب حقيقي من المجتمع',
       'reviews.title': 'كلمات من محبي حلوياتنا.',
       'reviews.intro': 'رسائل عملاء حقيقية من مجتمع واتساب. انقر على أي تقييم لعرض لقطة الشاشة الكاملة.',
@@ -222,6 +265,7 @@
       'footer.bio': 'علامة حلويات صحية حرفية صُنعت بعناية. استمتع بحلاوة بلا تنازلات من مكونات طبيعية نظيفة ومغذية.',
       'footer.nav': 'التنقل',
       'footer.creations': 'إبداعات الحلويات',
+      'footer.order': 'اطلب الآن',
       'footer.reviews': 'آراء العملاء',
       'footer.video': 'شهادات الفيديو',
       'footer.connect': 'تواصل',
@@ -239,7 +283,7 @@
       'modal.protein': 'بروتين نظيف',
       'modal.fiber': 'ألياف غذائية',
       'modal.ingredients': 'مكونات صحية',
-      'modal.cta': 'استفسر / اطلب دفعة على إنستغرام'
+      'modal.cta': 'اطلب هذا المنتج'
     }
   };
 
@@ -267,6 +311,11 @@
     document.querySelectorAll('[data-i18n-content]').forEach((el) => {
       const key = el.getAttribute('data-i18n-content');
       if (dict[key] != null) el.setAttribute('content', dict[key]);
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (dict[key] != null) el.setAttribute('placeholder', dict[key]);
     });
 
     if (dict['page.title']) document.title = dict['page.title'];

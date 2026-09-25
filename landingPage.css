@@ -1131,6 +1131,117 @@ h1, h2, h3, h4 {
 }
 
 /* --------------------------------------------------------------------------
+   Order Now
+   -------------------------------------------------------------------------- */
+.order-section {
+  padding: 90px 0;
+  background:
+    radial-gradient(ellipse at top left, rgba(231, 240, 233, 0.7) 0%, transparent 55%),
+    radial-gradient(ellipse at bottom right, rgba(252, 246, 236, 0.8) 0%, transparent 50%),
+    var(--bg-main);
+}
+
+.order-form {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.order-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 22px;
+}
+
+.order-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.order-field-full {
+  grid-column: 1 / -1;
+}
+
+.order-field label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  letter-spacing: 0.01em;
+}
+
+.order-field input,
+.order-field select,
+.order-field textarea {
+  width: 100%;
+  appearance: none;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  color: var(--text-body);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  font: inherit;
+  font-size: 0.98rem;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.order-field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238E827A' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 42px;
+}
+
+html[dir="rtl"] .order-field select {
+  background-position: left 14px center;
+  padding-right: 16px;
+  padding-left: 42px;
+}
+
+.order-field textarea {
+  resize: vertical;
+  min-height: 96px;
+}
+
+.order-field input:focus,
+.order-field select:focus,
+.order-field textarea:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 4px rgba(74, 111, 84, 0.12);
+}
+
+.order-form-error {
+  margin-top: 16px;
+  color: var(--accent-rose);
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.order-submit {
+  margin-top: 24px;
+  width: 100%;
+  justify-content: center;
+  gap: 10px;
+}
+
+.order-form-hint {
+  margin-top: 14px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 720px) {
+  .order-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .order-section {
+    padding: 70px 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
    Customer Reviews (WhatsApp Testimonials)
    -------------------------------------------------------------------------- */
 .reviews-section {

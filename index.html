@@ -15,7 +15,7 @@
         href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="landingPage.css?v=20260922b">
+    <link rel="stylesheet" href="landingPage.css?v=20260925d">
     <style>
       [data-cms-hidden="true"] { display: none !important; }
     </style>
@@ -39,6 +39,7 @@
                 <ul class="nav-links">
                     <li><a href="#about" data-i18n="nav.story">Our Story</a></li>
                     <li><a href="#products" data-i18n="nav.creations">Creations</a></li>
+                    <li><a href="#order" data-i18n="nav.order">Order Now</a></li>
                     <li><a href="#reviews" data-i18n="nav.love">Customer Love</a></li>
                     <li><a href="#video-review" data-i18n="nav.watch">Watch Reviews</a></li>
                     <li><a href="#instagram" data-i18n="nav.community">Community</a></li>
@@ -74,12 +75,13 @@
             <ul class="mobile-links">
                 <li><a href="#about" class="mobile-nav-link" data-i18n="nav.story">Our Story</a></li>
                 <li><a href="#products" class="mobile-nav-link" data-i18n="nav.creations">Creations</a></li>
+                <li><a href="#order" class="mobile-nav-link" data-i18n="nav.order">Order Now</a></li>
                 <li><a href="#reviews" class="mobile-nav-link" data-i18n="nav.love">Customer Love</a></li>
                 <li><a href="#video-review" class="mobile-nav-link" data-i18n="nav.watch">Watch Reviews</a></li>
                 <li><a href="#instagram" class="mobile-nav-link" data-i18n="nav.community">Community</a></li>
             </ul>
             <div class="mobile-action-wrapper">
-                <a href="#instagram" class="btn btn-primary mobile-cta" data-i18n="nav.explore_ig">Explore on Instagram</a>
+                <a href="#order" class="btn btn-primary mobile-cta" data-i18n="nav.order">Order Now</a>
             </div>
         </div>
     </header>
@@ -454,11 +456,10 @@
                     </div>
                     <div class="callout-content">
                         <h4 data-i18n="callout.title">Every batch is freshly made to order</h4>
-                        <p data-i18n="callout.desc">We believe in absolute freshness. Connect with us on Instagram to see current batch
-                            availability and discover seasonal flavors.</p>
+                        <p data-i18n="callout.desc">We believe in absolute freshness. Fill in your order details and send them to us on WhatsApp in one tap.</p>
                     </div>
-                    <a href="#instagram" class="btn btn-callout-cta">
-                        <span data-i18n="callout.cta">Check Availability</span>
+                    <a href="#order" class="btn btn-callout-cta">
+                        <span data-i18n="callout.cta">Order Now</span>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -466,6 +467,71 @@
                         </svg>
                     </a>
                 </div>
+            </div>
+        </section>
+
+        <!-- ORDER NOW SECTION -->
+        <section class="order-section animate-section" id="order" data-section-anim="order" data-cms-section="order">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="seq-item sub-heading" data-i18n="order.eyebrow">Order Now</span>
+                    <h2 class="seq-item section-title" data-i18n="order.title">Place your order in a minute.</h2>
+                    <p class="seq-item section-intro" data-i18n="order.intro">
+                        Choose a creation, share your details, and we will open WhatsApp with your order ready to send.
+                    </p>
+                </div>
+
+                <form id="orderForm" class="order-form seq-item" data-cms-whatsapp data-whatsapp="201036595467" novalidate>
+                    <div class="order-form-grid">
+                        <div class="order-field order-field-full">
+                            <label for="orderProduct" data-i18n="order.product">Product</label>
+                            <select id="orderProduct" name="product" required>
+                                <option value="" data-i18n="order.product_placeholder">Select a product</option>
+                                <option value="p1" data-i18n="p1.name">Peanut Chocolate Protein Bar</option>
+                                <option value="p2" data-i18n="p2.name">Pumpkin Seeds Protein Bar</option>
+                                <option value="p3" data-i18n="p3.name">Peanut Classic Protein Bar</option>
+                                <option value="p4" data-i18n="p4.name">Coconut Classic Protein Bar</option>
+                                <option value="custom" data-i18n="order.custom">Custom / Other request</option>
+                            </select>
+                        </div>
+
+                        <div class="order-field">
+                            <label for="orderName" data-i18n="order.name">Full name</label>
+                            <input id="orderName" name="name" type="text" autocomplete="name" required>
+                        </div>
+
+                        <div class="order-field">
+                            <label for="orderMobile" data-i18n="order.mobile">Mobile number</label>
+                            <input id="orderMobile" name="mobile" type="tel" autocomplete="tel" inputmode="tel" required>
+                        </div>
+
+                        <div class="order-field order-field-full">
+                            <label for="orderLocation" data-i18n="order.location">Location / Delivery area</label>
+                            <input id="orderLocation" name="location" type="text" autocomplete="street-address" required>
+                        </div>
+
+                        <div class="order-field order-field-full">
+                            <label for="orderNotes" data-i18n="order.notes">Notes</label>
+                            <textarea id="orderNotes" name="notes" rows="3" data-i18n-placeholder="order.notes_placeholder"
+                                placeholder="Quantity, preferred time, or special requests"></textarea>
+                        </div>
+                    </div>
+
+                    <p id="orderFormError" class="order-form-error" hidden data-i18n="order.error">
+                        Please fill in product, name, mobile, and location.
+                    </p>
+
+                    <button type="submit" class="btn btn-primary order-submit">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
+                        </svg>
+                        <span data-i18n="order.submit">Send Order on WhatsApp</span>
+                    </button>
+                    <p class="order-form-hint" data-i18n="order.hint">
+                        Your details open in WhatsApp so you can confirm and send the order.
+                    </p>
+                </form>
             </div>
         </section>
 
@@ -867,6 +933,7 @@
                 <ul>
                     <li><a href="#about" data-i18n="nav.story">Our Story</a></li>
                     <li><a href="#products" data-i18n="footer.creations">Dessert Creations</a></li>
+                    <li><a href="#order" data-i18n="footer.order">Order Now</a></li>
                     <li><a href="#reviews" data-i18n="footer.reviews">Customer Reviews</a></li>
                     <li><a href="#video-review" data-i18n="footer.video">Video Testimonials</a></li>
                 </ul>
@@ -875,9 +942,9 @@
             <div class="footer-links-col seq-item">
                 <h4 data-i18n="footer.connect">Connect</h4>
                 <ul>
+                    <li><a href="#order" data-i18n="footer.order">Order Now</a></li>
                     <li><a href="#instagram" data-i18n="footer.ig">Instagram (@joynfit)</a></li>
                     <li><a href="#reviews" data-i18n="footer.wa">WhatsApp Feedback</a></li>
-                    <li><a href="#products" data-i18n="footer.batch">Batch Inquiries</a></li>
                 </ul>
             </div>
 
@@ -964,8 +1031,8 @@
                         <p id="modalProductIngredients"></p>
                     </div>
 
-                    <a href="#instagram" class="btn btn-primary" id="modalProductCta" data-i18n="modal.cta">
-                        Inquire / Request Batch on Instagram
+                    <a href="#order" class="btn btn-primary" id="modalProductCta" data-i18n="modal.cta">
+                        Order this creation
                     </a>
                 </div>
             </div>
@@ -973,9 +1040,9 @@
     </div>
 
     <!-- JavaScript logic -->
-    <script src="cms.js?v=20260925c"></script>
-    <script src="i18n.js?v=20260922d"></script>
-    <script src="landingPage.js?v=20260922d"></script>
+    <script src="cms.js?v=20260925d"></script>
+    <script src="i18n.js?v=20260925d"></script>
+    <script src="landingPage.js?v=20260925d"></script>
 </body>
 
 </html>

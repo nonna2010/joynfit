@@ -15,6 +15,7 @@
     'hero',
     'about',
     'products',
+    'order',
     'reviews',
     'video',
     'instagram',
