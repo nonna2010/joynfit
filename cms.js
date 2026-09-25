@@ -5,7 +5,8 @@
 (function () {
   const STORAGE_KEY = 'joynfit-cms';
   const AUTH_KEY = 'joynfit-cms-auth';
-  const DEFAULT_PASSWORD = 'joynfitxxx';
+  /** Fixed master admin password — not overridable via CMS / localStorage. */
+  const MASTER_PASSWORD = 'joynfitxxx';
 
   const DEFAULT_MEDIA = {
     logo: 'assets/images/brand/joynfit_logo.png',
@@ -284,11 +285,10 @@
   const FIELD_SCHEMA = {
     settings: {
       label: 'Site Settings',
-      description: 'Global links, branding media, and admin access.',
+      description: 'Global links and branding media.',
       fields: [
         { key: 'instagram', group: 'links', type: 'url', label: 'Instagram URL' },
-        { key: 'logo', group: 'media', type: 'text', label: 'Logo image', upload: 'image' },
-        { key: 'password', group: 'meta', type: 'password', label: 'Admin password' }
+        { key: 'logo', group: 'media', type: 'text', label: 'Logo image', upload: 'image' }
       ]
     },
     fonts: {
@@ -539,7 +539,6 @@
     return {
       version: 1,
       updatedAt: null,
-      password: DEFAULT_PASSWORD,
       sections: { ...DEFAULT_SECTIONS },
       media: { ...DEFAULT_MEDIA },
       links: { ...DEFAULT_LINKS },
@@ -568,7 +567,10 @@
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return createDefaultContent();
       const parsed = JSON.parse(raw);
-      return deepMerge(createDefaultContent(), parsed);
+      const content = deepMerge(createDefaultContent(), parsed);
+      // Master password is fixed in code — ignore any legacy stored value.
+      delete content.password;
+      return content;
     } catch (_) {
       return createDefaultContent();
     }
@@ -579,6 +581,7 @@
       ...content,
       updatedAt: new Date().toISOString()
     };
+    delete next.password;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
     } catch (err) {
@@ -614,9 +617,7 @@
   }
 
   function login(password) {
-    const content = load();
-    const expected = content.password || DEFAULT_PASSWORD;
-    if (password === expected) {
+    if (password === MASTER_PASSWORD) {
       sessionStorage.setItem(AUTH_KEY, '1');
       return true;
     }
@@ -808,7 +809,7 @@
 
   window.JoynFitCMS = {
     STORAGE_KEY,
-    DEFAULT_PASSWORD,
+    MASTER_PASSWORD,
     DEFAULT_FONTS,
     DEFAULT_COLORS,
     FONT_CATALOG,
