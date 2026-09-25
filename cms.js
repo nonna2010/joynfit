@@ -7,6 +7,7 @@
   const AUTH_KEY = 'joynfit-cms-auth';
   /** Fixed master admin password — not overridable via CMS / localStorage. */
   const MASTER_PASSWORD = 'joynfitxxx';
+  const PASSWORD_MIGRATION_KEY = 'joynfit-cms-password-migrated';
 
   const DEFAULT_MEDIA = {
     logo: 'assets/images/brand/joynfit_logo.png',
@@ -539,6 +540,7 @@
     return {
       version: 1,
       updatedAt: null,
+      password: MASTER_PASSWORD,
       sections: { ...DEFAULT_SECTIONS },
       media: { ...DEFAULT_MEDIA },
       links: { ...DEFAULT_LINKS },
@@ -562,15 +564,38 @@
     return out;
   }
 
+  /** Overwrite any legacy stored password and invalidate old admin sessions. */
+  function resetPasswordToMaster(content, previousPassword) {
+    const next = { ...content, password: MASTER_PASSWORD };
+    const needsReset = previousPassword !== undefined && previousPassword !== MASTER_PASSWORD;
+    try {
+      if (needsReset || localStorage.getItem(PASSWORD_MIGRATION_KEY) !== MASTER_PASSWORD) {
+        sessionStorage.removeItem(AUTH_KEY);
+        localStorage.setItem(PASSWORD_MIGRATION_KEY, MASTER_PASSWORD);
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify({ ...next, updatedAt: new Date().toISOString() })
+        );
+      }
+    } catch (_) { /* ignore quota / private mode */ }
+    return next;
+  }
+
   function load() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return createDefaultContent();
+      if (!raw) {
+        try {
+          localStorage.setItem(PASSWORD_MIGRATION_KEY, MASTER_PASSWORD);
+        } catch (_) { /* ignore */ }
+        return createDefaultContent();
+      }
       const parsed = JSON.parse(raw);
+      const previousPassword = Object.prototype.hasOwnProperty.call(parsed, 'password')
+        ? parsed.password
+        : undefined;
       const content = deepMerge(createDefaultContent(), parsed);
-      // Master password is fixed in code — ignore any legacy stored value.
-      delete content.password;
-      return content;
+      return resetPasswordToMaster(content, previousPassword);
     } catch (_) {
       return createDefaultContent();
     }
@@ -579,11 +604,12 @@
   function save(content) {
     const next = {
       ...content,
+      password: MASTER_PASSWORD,
       updatedAt: new Date().toISOString()
     };
-    delete next.password;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      localStorage.setItem(PASSWORD_MIGRATION_KEY, MASTER_PASSWORD);
     } catch (err) {
       const quota = err && (err.name === 'QuotaExceededError' || err.code === 22);
       if (quota) {
@@ -595,7 +621,11 @@
   }
 
   function reset() {
-    localStorage.removeItem(STORAGE_KEY);
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.setItem(PASSWORD_MIGRATION_KEY, MASTER_PASSWORD);
+      sessionStorage.removeItem(AUTH_KEY);
+    } catch (_) { /* ignore */ }
     return createDefaultContent();
   }
 
