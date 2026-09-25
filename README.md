@@ -19,7 +19,7 @@ Then visit http://localhost:8080
 Control any website section from the content admin:
 
 - Open http://localhost:8080/admin.html
-- Default password: `joynfit` (change it under **Site Settings**)
+- Default password: `joynfitxxx` (change it under **Site Settings**)
 - Edit texts (EN / AR), images, Instagram URL, video, fonts, text colors, and section visibility
 - Click **Save changes**, then refresh the public site
 

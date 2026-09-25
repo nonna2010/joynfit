@@ -5,7 +5,7 @@
 (function () {
   const STORAGE_KEY = 'joynfit-cms';
   const AUTH_KEY = 'joynfit-cms-auth';
-  const DEFAULT_PASSWORD = 'joynfit';
+  const DEFAULT_PASSWORD = 'joynfitxxx';
 
   const DEFAULT_MEDIA = {
     logo: 'assets/images/brand/joynfit_logo.png',
